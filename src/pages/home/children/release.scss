@@ -1,0 +1,65 @@
+.most-expected-wrapper{
+  height: 150px;
+  overflow: hidden;
+}
+.most-expected {
+  padding: 12px 0 12px 15px;
+  margin-bottom: 10px;
+  .title {
+    margin: 0 0 12px;
+    font-size: 14px;
+    color: #333;
+  }
+  .poster {
+    width: 85px;
+    height: 115px;
+    position: relative;
+    margin-bottom: 6px;
+    img {
+      height: 100%;
+      vertical-align: middle;
+    }
+  }
+  .most-expected-list {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+  }
+}
+
+.most-expected-list {
+  .movie-item {
+    display: inline-block;
+    width: 85px;
+    overflow: hidden;
+    margin-right: 10px;
+  }
+  .title {
+    margin: 0 0 3px;
+    font-size: 13px;
+    color: #222;
+  }
+  .date {
+    margin: 0;
+    font-size: 12px;
+    color: #999;
+  }
+  img {
+    width: 100%;
+  }
+}
+.comming-group{
+  padding: 0 15px 0;
+  .movie-group{
+    margin: 20px 0;
+  }
+}
+
+.comingList {
+  padding-left: 15px;
+  padding-top: 10px;
+  background: #fff;
+  .group-date {
+    padding-top: 10px;
+  }
+}

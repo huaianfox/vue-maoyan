@@ -1,12 +1,26 @@
 import Vue from 'vue'
+import fastClick from 'fastclick'
+import 'babel-polyfill'
 import App from './App.vue'
-import router from './router'
-import store from './store'
+import router from './router/index'
+import store from './store/'
+import VueLazyload from 'vue-lazyload'
+import infiniteScroll from 'vue-infinite-scroll'
+import InfiniteLoading from 'vue-infinite-loading'
+import './assets/styles/index.scss'
 
 Vue.config.productionTip = false
+fastClick.attach(document.body)
+Vue.use(VueLazyload, {
+  loading: './assets/loading.svg'
+})
+
+Vue.use(infiniteScroll)
+Vue.use(InfiniteLoading)
 
 new Vue({
   router,
   store,
+  directives: { infiniteScroll },
   render: h => h(App)
 }).$mount('#app')

@@ -1,0 +1,76 @@
+.thumb {
+  display: flex;
+  justify-content: center;
+  align-items: center; // padding: 12px 0;
+  position: relative;
+  .avatar {
+    width: 64px;
+    height: 90px;
+    position: relative;
+    img {
+      width: 100%;
+    }
+  }
+  .info {
+    flex: 1;
+    position: relative;
+    padding: 8px 50px 12px 0;
+    margin: 0 10px;
+    text-align: left;
+    height: 90px;
+    max-height: 90px;
+    font-size: 13px;
+    border-bottom: 1px solid #ddd;
+    overflow: hidden;
+    .ellipsis {
+      margin-top: 6px;
+      line-height: 15px;
+    }
+    .movie-title {
+      max-height: 24px;
+      margin-bottom: 7px;
+      line-height: 24px;
+      overflow: hidden;
+      .name {
+        font-size: 17px;
+        color: #333;
+        font-weight: 700;
+        padding-right: 5px;
+        flex-shrink: 1;
+      }
+    }
+    .person {
+      color: #faaf00;
+      font-size: 15px;
+      font-weight: 600;
+    }
+  }
+  .buy-action {
+    position: absolute;
+    right: 14px;
+    top: 0;
+    margin: auto;
+    bottom: 0;
+    height: 27px;
+    font-size: 12px;
+    .sell {
+      width: 47px;
+      height: 27px;
+      line-height: 28px;
+      text-align: center;
+      box-sizing: border-box;
+      background-color: #f03d37;
+      color: #fff;
+      border-radius: 4px;
+      white-space: nowrap;
+      font-size: 12px;
+      cursor: pointer;
+      &.presell {
+        background-color: #3c9fe6;
+      }
+      &.wantsee {
+        background-color: #faaf00;
+      }
+    }
+  }
+}
