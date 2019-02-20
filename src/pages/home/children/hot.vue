@@ -1,34 +1,34 @@
 <template>
-  <section
-    class="inner"
-    v-infinite-scroll="loadMore"
-    infinite-scroll-disabled="busy"
-    infinite-scroll-distance="40"
-  >
-  <router-link :to="'cinema/movie/'+ item.id" v-for="(item, index) in movieList" :key="index">
-    <Thumbnail :movie="item" />
-  </router-link>
+  <section class="inner"
+           v-infinite-scroll="loadMore"
+           infinite-scroll-disabled="busy"
+           infinite-scroll-distance="40">
+    <router-link :to="'cinema/movie/'+ item.id"
+                 v-for="(item, index) in movieList"
+                 :key="index">
+      <Thumbnail :movie="item" />
+    </router-link>
   </section>
 </template>
 
 <script>
-import Thumbnail from "@/components/thumbnail";
-import { getInfoListAction } from "@/api"
-import { setImgSize } from "@/util"
+import Thumbnail from '@/components/thumbnail'
+import { getInfoListAction } from '@/api'
+import { setImgSize } from '@/util'
 
 export default {
-  name: "Hot",
-  data() {
+  name: 'Hot',
+  data () {
     return {
       movieList: [],
       movieIds: [],
       params: {
-        token: ""
+        token: ''
       },
       offset: 0,
       limit: 12,
       total: 0
-    };
+    }
   },
   props: {
     msg: String
@@ -37,8 +37,8 @@ export default {
     Thumbnail
   },
   methods: {
-    loadMore() {
-      this.busy = true;
+    loadMore () {
+      this.busy = true
       const { offset, limit, total } = this
       const isFirst = offset === 0
       if (offset && offset > total) return
@@ -62,12 +62,12 @@ export default {
       })
     }
   }
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang='scss' scoped>
-@import "../../../scss/fn.scss";
+@import '../../../scss/fn.scss';
 .inner {
   padding: 0 15px;
   background: #fff;

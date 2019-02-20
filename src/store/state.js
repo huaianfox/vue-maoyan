@@ -1,6 +1,9 @@
+import storage from 'store'
+
+const city = storage.get('city') || { nm: '淮安', ci: 180 }
 
 export default {
-  city: localStorage.city || '淮安',
+  city,
   pageTitle: '猫眼电影',
   detailMovie: {}
 }

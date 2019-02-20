@@ -1,7 +1,11 @@
 <template>
   <BaseTopBar :styles="bg">
-    <router-link to="search?searchtype=cinema&$from=canary" solt="search" class="movie-search iconfont icon-search">
-    搜索影院
+    <router-link
+      to="search?searchtype=cinema&$from=canary"
+      solt="search"
+      class="movie-search iconfont icon-search"
+    >
+      搜索影院
     </router-link>
   </BaseTopBar>
 </template>
@@ -10,7 +14,7 @@
 import BaseTopBar from "@/components/topbar/base"
 
 export default {
-  data() {
+  data () {
     return {
       bg: {
         background: '#f5f5f5'
@@ -31,7 +35,7 @@ export default {
   line-height: 28px;
   text-align: center;
   font-size: 14px;
-  border: .5px solid #e6e6e6;
+  border: 0.5px solid #e6e6e6;
   background: #fff;
 }
 </style>

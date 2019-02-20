@@ -1,5 +1,8 @@
 <template>
-  <div class="cinema-wrapper">
+  <div
+    class="cinema-wrapper"
+    v-show="cinemas.length"
+  >
     <router-link
       :to="`/shows/${cinema.id}`"
       class="cinema-info"
@@ -18,7 +21,10 @@
         <span class="distance">{{cinema.distance}}</span>
       </div>
       <div class="cinema-label ellipsis"></div>
-      <div class="cinema-discount ellipsis" v-if="cinema.promotion.cardPromotionTag">
+      <div
+        class="cinema-discount ellipsis"
+        v-if="cinema.promotion.cardPromotionTag"
+      >
         <span class="cinema-discount-label">
           <img
             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAeCAYAAABNChwpAAAAAXNSR0IArs4c6QAAAgFJREFUSA3Nlz1LA0EQhmf3kouFEQwi+FEYQ+xEsImFoCDoL/CLaKd/QbC0sbCzFVuxsRS1jEVAsUqrIILRQAhaBGKMuawzwpGAm83mNhddCHfZnd3n3Z2ZuxsG2JI3YtQpVw6AiTkhYJj6/GqMwSsIdm312DsnMyzLCF79rGRAiIhfUOm6jL0FQvZU4Gfn0GU4KcINE5vjsc9LFXajE9kcfT7UDZaMQWwuG9Dpi/YyiIWZjqnSxrOAtWgANsYDysV1Bj0L0Flcx8ZoC1F0wf50UMo5fqjCY1FIxxo7jQSUHWgK+ag2YprfGwnIlQTQTk3a/46B2UEOIUu+v0gIIMgZLLTIZHJTOl+TL4K9ShckMc36Q+pc356QB6FLLJQFCqi4f39d2WoKLTy03ckg2OjAvcyXh9n1KX8eA0YC4n0MtuLoJru+o3bvjAS8o2vpfXCYsGEzZkFYHQ5SbcoglM5o6KQAoxhIDHBYiVqYERZcZB04f3aghNGv04wEuIDbQg3u8Lc4YsHymAVLeD17cuDypbWKjgggIZTpVwhM5x1YxzdlpaaXXB0T4J5GEbPy6F7/8WwUhC7U5OpZgIPfU5qnrNTn+UmoXLWNQc8n0AZDacqxUskpLXwcJDbHMinlI0O9NLI51WiAZZLa0odRZBKbU4FINRoDdtoNdxCDWMQk9jePWpE8hVOLbwAAAABJRU5ErkJggg=="
@@ -32,26 +38,26 @@
 </template>
 
 <script >
-import { postMovie } from "@/api"
+import { postMovie } from '@/api'
 import { getDay } from '@/util/date'
 
 export default {
-  data() {
+  data () {
     return {
       cinemas: []
-    };
+    }
   },
   props: {
-    movieId : {
+    movieId: {
       type: Number,
       default: 0
     }
   },
-  mounted() {
-    const movieId  = this.movieId 
+  activated () {
+    const movieId = this.movieId
     postMovie({
       params: {
-        postMovie: "1550556498969"
+        postMovie: '1550556498969'
       },
       data: {
         movieId,
@@ -73,7 +79,7 @@ export default {
       this.cinemas = data.cinemas
     })
   }
-};
+}
 </script>
 
 <style scoped lang="scss">
@@ -109,7 +115,7 @@ export default {
   font-size: 13px;
   color: #666;
 }
-.cinema-address-info{
+.cinema-address-info {
   flex: 1;
 }
 .cinema-discount {
@@ -128,4 +134,3 @@ export default {
   }
 }
 </style>
-

@@ -1,9 +1,13 @@
 <template>
   <div class="page">
-    <Navbar/>
+    <Navbar />
     <div class="search-header">
       <div class="input-wrapper">
-        <input  v-model="searchText" @input="handleSearchInput"  type="text" class="search-input" placeholder="搜影院">
+        <input v-model="searchText"
+               @input="handleSearchInput"
+               type="text"
+               class="search-input"
+               placeholder="搜影院">
       </div>
       <div class="cancel">取消</div>
     </div>
@@ -12,13 +16,13 @@
 </template>
 
 <script >
-import Navbar from "@/components/navbar"
+import Navbar from '@/components/navbar'
 import { getSearch } from '@/api'
-import ResultHistory from "./components/history"
+import ResultHistory from './components/history'
 
 export default {
-  name: "Search",
-  data() {
+  name: 'Search',
+  data () {
     return {
       searchText: '',
       searchType: {
@@ -50,7 +54,7 @@ export default {
     Navbar,
     ResultHistory
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

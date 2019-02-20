@@ -1,21 +1,20 @@
 <template>
   <div class="panel">
-    <TopBar/>
-    <SelectPanel class="select-wrapper"/>
-    <CinemaList class="cinemas"/>
+    <TopBar />
+    <SelectPanel class="select-wrapper" />
+    <CinemaList class="cinemas" />
   </div>
 </template>
 
 <script>
-import TopBar from "./top";
-import SelectPanel from "@/components/selectPanel";
-import CinemaList from "@/components/cinemaList";
-// import CinemaList from './cinemaList'
+import TopBar from './top'
+import SelectPanel from '@/components/selectPanel'
+import CinemaList from '@/components/cinemaList'
 
 export default {
-  name: "Cinema",
+  name: 'Cinema',
   created () {
-    this.$store.commit('changePageTitle', "影院")
+    this.$store.commit('changePageTitle', '影院')
   },
   components: {
     TopBar,

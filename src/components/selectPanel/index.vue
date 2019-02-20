@@ -1,53 +1,53 @@
 <template>
   <section class="select-wrapper">
     <nav class="select-tab">
-      <div v-if="selected" class="masker" @click="closeChoosed"></div>
-      <div
-        class="select-tab-item"
-        v-for="tab in tabs"
-        :key="tab.name"
-        :class="selected===tab.name?'active':''"
-        @click="choose(tab)"
-      >{{tab.text}}</div>
+      <div v-if="selected"
+           class="masker"
+           @click="closeChoosed"></div>
+      <div class="select-tab-item"
+           v-for="tab in tabs"
+           :key="tab.name"
+           :class="selected===tab.name?'active':''"
+           @click="choose(tab)">{{tab.text}}</div>
     </nav>
   </section>
 </template>
 
 <script >
 export default {
-  data() {
+  data () {
     return {
-      selected: "",
+      selected: '',
       tabs: [
         {
-          name: "region",
-          text: "全城"
+          name: 'region',
+          text: '全城'
         },
         {
-          name: "brand",
-          text: "品牌"
+          name: 'brand',
+          text: '品牌'
         },
         {
-          name: "special",
-          text: "特色"
+          name: 'special',
+          text: '特色'
         }
       ]
     }
   },
   components: {},
   methods: {
-    choose(tab) {
-      this.selected = tab.name;
+    choose (tab) {
+      this.selected = tab.name
     },
-    closeChoosed() {
-      this.selected = ""
+    closeChoosed () {
+      this.selected = ''
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
-@import "../../scss/fn.scss";
+@import '../../scss/fn.scss';
 $selectDefaultColor: #b0b0b0;
 $selectedColor: #e54847;
 
@@ -69,7 +69,7 @@ $selectedColor: #e54847;
       overflow: hidden;
       font-size: 13px;
       & + .select-tab-item:after {
-        content: "";
+        content: '';
         display: block;
         position: absolute;
         height: 20px;
@@ -79,7 +79,7 @@ $selectedColor: #e54847;
       }
 
       &:before {
-        content: "";
+        content: '';
         display: block;
         position: absolute;
         top: 50%;

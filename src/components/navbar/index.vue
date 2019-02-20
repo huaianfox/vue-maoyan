@@ -1,7 +1,14 @@
 <template>
-  <header class="navbar" 
-  :class="{back: back, 'navbar-fiexd': fixed}">
-    <a v-if="back" @click="goback" href="javascript:void(0);" class="iconfont icon-back"></a>
+  <header
+    class="navbar"
+    :class="{back: back, 'navbar-fiexd': fixed}"
+  >
+    <a
+      v-if="back"
+      @click="goback"
+      href="javascript:void(0);"
+      class="iconfont icon-back"
+    ></a>
     <h1 class="navbar-title ellipsis">{{pageTitle}}</h1>
   </header>
 </template>
@@ -9,11 +16,11 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-  name: "Navbar",
-  data() {
+  name: 'Navbar',
+  data () {
     return {
-      defaultTitle: "猫眼电影"
-    };
+      defaultTitle: '猫眼电影'
+    }
   },
   computed: {
     ...mapState(['pageTitle'])
@@ -22,7 +29,7 @@ export default {
     msg: String,
     title: {
       type: String,
-      default: "猫眼电影"
+      default: '猫眼电影'
     },
     back: {
       type: Boolean,
@@ -34,16 +41,16 @@ export default {
     }
   },
   methods: {
-    goback() {
-      this.$router.back();
+    goback () {
+      this.$router.back()
     }
   }
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang='scss' >
-@import "../../scss/fn.scss";
+@import '../../scss/fn.scss';
 
 .navbar {
   display: flex;
@@ -72,7 +79,7 @@ export default {
       margin-right: 52px;
     }
   }
-  .iconfont{
+  .iconfont {
     display: block;
     width: 52px;
     text-align: center;

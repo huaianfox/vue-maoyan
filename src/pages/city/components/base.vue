@@ -9,13 +9,13 @@
 
 <script >
 export default {
-  data() {
+  data () {
     return {}
   },
   props: {
     title: {
       type: String,
-      default: ""
+      default: ''
     }
   }
 }

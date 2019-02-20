@@ -1,21 +1,11 @@
 <template>
- <section>
-   <header class="panel-title"></header>
-   <div class="panel-body"></div>
- </section>
+  <section>
+    <header class="panel-title"></header>
+    <div class="panel-body"></div>
+  </section>
 </template>
 
 <script >
- export default {
-   data() {
-     return {
-
-     }
-
-   }
- }
+export default {
+}
 </script>
-
-<style scoped lang="scss">
-
-</style>

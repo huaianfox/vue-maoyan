@@ -12,7 +12,7 @@
 
 <script >
 export default {
-  data() {
+  data () {
     return {}
   }
 }
@@ -25,17 +25,17 @@ export default {
   padding-right: 100px;
   background: #fff;
   .info {
-    .title{
+    .title {
       font-size: 17px;
-    line-height: 24px;
-    font-weight: 700;
-    color: #333;
+      line-height: 24px;
+      font-weight: 700;
+      color: #333;
     }
     .addr {
-          margin-top: 2px;
-    font-size: 13px;
-    line-height: 18.5px;
-    color: #999;
+      margin-top: 2px;
+      font-size: 13px;
+      line-height: 18.5px;
+      color: #999;
     }
   }
   .location {

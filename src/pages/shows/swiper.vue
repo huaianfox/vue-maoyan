@@ -1,10 +1,13 @@
 <template>
   <section class="cinema-nav">
-    <div class="post-bg" :style="{background: backgroundImg}"></div>
+    <div class="post-bg"
+         :style="{background: backgroundImg}"></div>
     <swiper :options="swiperOption">
-      <swiper-slide v-for="item in list" :key="item.img">
+      <swiper-slide v-for="item in list"
+                    :key="item.img">
         <div class="poster">
-          <img :src="item.img" alt>
+          <img :src="item.img"
+               alt>
         </div>
       </swiper-slide>
       <!-- <div class="swiper-pagination" slot="pagination"/> -->
@@ -14,17 +17,17 @@
 
 <script >
 // import Slider from "@/components/slider";
-import { swiper, swiperSlide } from "vue-awesome-swiper";
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
+
 export default {
-  data() {
+  data () {
     return {
-      backgroundImg:
-        "url(//p0.meituan.net/148.208/movie/caa49433185fd62b4384e3ad195ec1541309089.jpg)",
+      backgroundImg: 'url(//p0.meituan.net/148.208/movie/caa49433185fd62b4384e3ad195ec1541309089.jpg)',
       currentIndex: 0,
       swiperOption: {
         delay: 2500,
         pagination: {
-          el: ".swiper-pagination",
+          el: '.swiper-pagination',
           clickable: true
         },
         notNextTick: false,
@@ -33,54 +36,51 @@ export default {
         paginationClickable: true,
         spaceBetween: 3,
         on: {
-          slideChangeTransitionStart() {
-            this.currentIndex = this.realIndex;
+          slideChangeTransitionStart () {
+            this.currentIndex = this.realIndex
           }
         }
       },
       list: [
         {
-          desc: "128分钟 | 剧情 | 吴京,屈楚萧,李光洁",
+          desc: '128分钟 | 剧情 | 吴京,屈楚萧,李光洁',
           dur: 128,
           globalReleased: true,
           id: 248906,
-          img:
-            "//p1.meituan.net/148.208/movie/616cd50a33550a9225ac781e52d14ae54967551.jpg",
-          nm: "流浪地球",
+          img: '//p1.meituan.net/148.208/movie/616cd50a33550a9225ac781e52d14ae54967551.jpg',
+          nm: '流浪地球',
           preferential: 0,
-          sc: "9.3",
+          sc: '9.3',
           showCount: 37
         },
         {
-          desc: "128分钟 | 剧情 | 吴京,屈楚萧,李光洁",
+          desc: '128分钟 | 剧情 | 吴京,屈楚萧,李光洁',
           dur: 128,
           globalReleased: true,
           id: 24890236,
-          img:
-            "//p0.meituan.net/148.208/movie/caa49433185fd62b4384e3ad195ec1541309089.jpg",
-          nm: "流浪地球",
+          img: '//p0.meituan.net/148.208/movie/caa49433185fd62b4384e3ad195ec1541309089.jpg',
+          nm: '流浪地球',
           preferential: 0,
-          sc: "9.3",
+          sc: '9.3',
           showCount: 37
         }
       ]
-    };
+    }
   },
   components: {
     swiper,
     swiperSlide
   },
   watch: {
-    currentIndex() {
-      console.log(this.currentIndex);
-      this.backgroundImg = `url(${this.list[this.currentIndex].img})`;
+    currentIndex () {
+      this.backgroundImg = `url(${this.list[this.currentIndex].img})`
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">
-@import "~swiper/dist/css/swiper.css";
+@import '~swiper/dist/css/swiper.css';
 .cinema-nav {
   padding: 20px 15px 20px 5px;
   overflow: hidden;
@@ -115,7 +115,7 @@ export default {
       transform: scale(1.1);
       border: 2px solid #fff;
       &:after {
-        content: "";
+        content: '';
         position: absolute;
         bottom: -6px;
         left: 50%;

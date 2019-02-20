@@ -1,8 +1,12 @@
 <template>
   <div class="page">
-    <Navbar :title="detailMovie.nm"/>
-    <MovieDetail :detailMovie="detailMovie" />
-    <div class="choose" ref="fixedConetnt" :class="{fixed: isFixed}">
+    <Navbar :title="detailMovie.nm" />
+    <MovieDetail />
+    <div
+      class="choose"
+      ref="fixedConetnt"
+      :class="{fixed: isFixed}"
+    >
       <Date />
       <SelectPanel />
     </div>
@@ -45,7 +49,7 @@ export default {
   mounted () {
     this.offsetHeight = this.$refs['fixedConetnt'].offsetTop
   },
-  activated() {
+  activated () {
     window.addEventListener('scroll', this.handleScroll)
   },
   deactivated () {
@@ -53,7 +57,7 @@ export default {
   },
   created () {
     const movieId = this.$route.params.id
-    getMovieDetail({params: {movieId}}).then(data => {
+    getMovieDetail({ params: { movieId } }).then(data => {
       this.detailMovie = data.detailMovie
     })
     const day = getDay()
@@ -77,11 +81,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.choose{
+.choose {
   background: #fff;
   z-index: 999;
 }
-.fixed{
+.fixed {
   position: fixed;
   top: 0;
   left: 0;

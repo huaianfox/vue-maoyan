@@ -1,21 +1,23 @@
 <template>
-  <header class="topbar" :style="styles">
-    <router-link to="city-list" class="city-entry">
-      {{city}}
+  <header
+    class="topbar"
+    :style="styles"
+  >
+    <router-link
+      to="city-list"
+      class="city-entry"
+    >
+      {{city.nm}}
     </router-link>
     <slot></slot>
-    <slot name="search" ></slot>
+    <slot name="search"></slot>
   </header>
 </template>
 
 <script>
-import { mapState } from "vuex"
+import { mapState } from 'vuex'
 export default {
-  name: 'Thumbnail',
-  data () {
-    return {
-    }
-  },
+  name: 'Topbar',
   props: {
     styles: {
       type: Object,
@@ -26,8 +28,6 @@ export default {
   },
   computed: {
     ...mapState(['city'])
-  },
-  methods: {
   }
 }
 </script>

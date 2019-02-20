@@ -1,55 +1,53 @@
 <template>
-  <div class="list" ref="wrapper">
+  <div class="list"
+       ref="wrapper">
     <div class="content">
       <Panel title="定位城市">
-        <div class="item">{{city}}</div>
+        <div class="item">{{city.nm}}</div>
       </Panel>
       <Panel title="最近访问城市">
         <div class="item">定位失败，请点击重试</div>
       </Panel>
       <Panel title="热门城市">
         <div class="item"
-          v-for="city in cities"
-          :key="city.id"
-          @click="handleCityClick(city.title)"
-          >{{city.title}}</div>
+             v-for="city in cities"
+             :key="city.id"
+             @click="handleCityClick(city)">{{city.nm}}</div>
       </Panel>
-      <Panel
-        class="cities-panel"
-        v-for="(cities, key) in letterMap"
-        :key="key"
-        :title="key"
-        :ref="key"
-      >
+      <Panel class="cities-panel"
+             v-for="(cities, key) in letterMap"
+             :key="key"
+             :title="key"
+             :ref="key">
         <!-- <p class="top" :ref="key"></p> -->
         <div class="city-name"
-         v-for="city in cities"
-        :key="city.id"
-        @click="handleCityClick(city.nm)"
-        >{{city.nm}}</div>
+             v-for="city in cities"
+             :key="city.id"
+             @click="handleCityClick(city)">{{city.nm}}</div>
       </Panel>
     </div>
   </div>
 </template>
 
 <script >
-import BScroll from "better-scroll"
-import { mapState, mapMutations } from "vuex"
-import Panel from "./base"
+import BScroll from 'better-scroll'
+import { mapState, mapMutations } from 'vuex'
+import Panel from './base'
+
 export default {
-  data() {
+  data () {
     return {
       cities: [
-        { id: "10", title: "上海" },
-        { id: "1", title: "北京" },
-        { id: "20", title: "广州" },
-        { id: "30", title: "深圳" },
-        { id: "57", title: "武汉" },
-        { id: "40", title: "天津" },
-        { id: "42", title: "西安" },
-        { id: "55", title: "南京" },
-        { id: "50", title: "杭州" },
-        { id: "45", title: "重庆" }
+        { id: '10', nm: '上海' },
+        { id: '1', nm: '北京' },
+        { id: '20', nm: '广州' },
+        { id: '30', nm: '深圳' },
+        { id: '57', nm: '武汉' },
+        { id: '40', nm: '天津' },
+        { id: '42', nm: '西安' },
+        { id: '55', nm: '南京' },
+        { id: '50', nm: '杭州' },
+        { id: '45', nm: '重庆' }
       ]
     }
   },
@@ -79,7 +77,7 @@ export default {
     },
     ...mapMutations(['changeCity'])
   },
-  mounted() {
+  mounted () {
     this.scroll = new BScroll(this.$refs.wrapper, {
       click: true
     })

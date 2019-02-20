@@ -1,11 +1,18 @@
 <template>
   <section :class="cname">
     <swiper>
-      <swiper-slide v-for="item in items" :key="item.img">
+      <swiper-slide
+        v-for="item in items"
+        :key="item.img"
+      >
         <slot></slot>
         {{item.img}}
       </swiper-slide>
-      <div class="swiper-pagination" v-if="options.pagination" slot="pagination"/>
+      <div
+        class="swiper-pagination"
+        v-if="options.pagination"
+        slot="pagination"
+      />
     </swiper>
   </section>
 </template>
@@ -13,8 +20,8 @@
 <script >
 import { swiper, swiperSlide } from "vue-awesome-swiper";
 export default {
-  data() {
-    return {};
+  data () {
+    return {}
   },
   components: {
     swiper,
@@ -27,7 +34,7 @@ export default {
     },
     options: {
       type: Object,
-      default() {
+      default () {
         return {
           autoplay: true,
           loop: true,
@@ -40,14 +47,14 @@ export default {
     },
     items: {
       type: Array,
-      default() {
+      default () {
         return [];
       }
     }
   }
-};
+}
 </script>
 
 <style lang="css">
-@import "~swiper/dist/css/swiper.css";
+@import '~swiper/dist/css/swiper.css';
 </style>

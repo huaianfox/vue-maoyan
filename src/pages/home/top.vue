@@ -9,30 +9,34 @@
         @click="switchMoviePanel(item, index)"
       >{{item.title}}</div>
     </div>
-    <router-link to="search?searchtype=movie&$from=canary" solt="search" class="movie-search iconfont icon-search"></router-link>
+    <router-link
+      to="search?searchtype=movie&$from=canary"
+      solt="search"
+      class="movie-search iconfont icon-search"
+    ></router-link>
   </BaseTopBar>
 </template>
 
 <script >
-import BaseTopBar from "@/components/topbar/base"
+import BaseTopBar from '@/components/topbar/base'
 
 export default {
-  data() {
+  data () {
     return {
       tabs: [
         {
-          path: "/",
-          title: "正在上映"
+          path: '/',
+          title: '正在上映'
         },
         {
-          path: "/release",
-          title: "即将上映"
+          path: '/release',
+          title: '即将上映'
         }
       ]
     }
   },
   methods: {
-    switchMoviePanel(item) {
+    switchMoviePanel (item) {
       this.$router.push(item.path)
     }
   },
@@ -43,7 +47,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../../scss/fn.scss";
+@import '../../scss/fn.scss';
 .hot-item {
   display: inline-block;
   position: relative;
@@ -57,7 +61,7 @@ export default {
   &.active {
     color: #ef4238;
     &::after {
-      content: "";
+      content: '';
       display: block;
       position: absolute;
       bottom: -1px;

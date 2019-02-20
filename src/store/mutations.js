@@ -1,8 +1,10 @@
+// eslint-disable-next-line no-unused-vars
+import storage from 'store'
 
 export default {
   changeCity (state, city) {
     state.city = city
-    localStorage.city = city
+    storage.set('city', city)
   },
   changePageTitle (state, title) {
     state.pageTitle = title

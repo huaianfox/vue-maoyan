@@ -1,20 +1,28 @@
 <template>
   <div class="page">
-    <NavBar :back="true" :fixed="true"/>
-    <List :geoCity="geoCity" :letterMap="letterMap" :letter="letter"/>
-    <Alphabet :letterMap="letterMap"
-    @changePanel="handleLetterChange"
+    <NavBar
+      :back="true"
+      :fixed="true"
+    />
+    <List
+      :geoCity="geoCity"
+      :letterMap="letterMap"
+      :letter="letter"
+    />
+    <Alphabet
+      :letterMap="letterMap"
+      @changePanel="handleLetterChange"
     />
   </div>
 </template>
 
 <script >
 import NavBar from '@/components/navbar'
-import List from "./components/list"
-import Alphabet from "./components/alphabet"
-import {getCityList} from '@/api'
+import List from './components/list'
+import Alphabet from './components/alphabet'
+import { getCityList } from '@/api'
 export default {
-  data() {
+  data () {
     return {
       letter: '',
       geoCity: {},
@@ -26,9 +34,9 @@ export default {
     NavBar,
     Alphabet
   },
-  created() {
+  created () {
     getCityList().then(resp => {
-      const {geoCity, letterMap} = resp.data
+      const { geoCity, letterMap } = resp.data
       this.geoCity = geoCity
       this.letterMap = letterMap
     })

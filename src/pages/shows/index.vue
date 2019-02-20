@@ -1,6 +1,6 @@
 <template>
   <div class="pages">
-    <NavBar :fixed="false"/>
+    <NavBar :fixed="false" />
     <Info />
     <Swiper />
   </div>
@@ -11,7 +11,7 @@ import NavBar from '@/components/navbar'
 import Info from './info'
 import Swiper from './swiper'
 export default {
-  data() {
+  data () {
     return {}
   },
   components: {

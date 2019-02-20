@@ -1,16 +1,19 @@
 <template>
   <div class="pages">
-    <NavBar :back="back" :fixed="fixed"/>
-    <router-view/>
-    <Tabbar/>
+    <NavBar
+      :back="back"
+      :fixed="fixed"
+    />
+    <router-view />
+    <Tabbar />
   </div>
 </template>
 
 <script>
-import NavBar from "@/components/navbar"
-import Tabbar from "@/components/tabbar"
+import NavBar from '@/components/navbar'
+import Tabbar from '@/components/tabbar'
 export default {
-  name: "Main",
+  name: 'Main',
   data () {
     return {
       back: false,

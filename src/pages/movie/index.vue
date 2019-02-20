@@ -12,8 +12,8 @@ import Navbar from '@/components/navbar'
 import Descp from './desc'
 
 export default {
-  data() {
-    return {};
+  data () {
+    return {}
   },
   components: {
     Navbar,
@@ -24,7 +24,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.page{
+.page {
   background: #f4f4f4;
 }
 </style>
