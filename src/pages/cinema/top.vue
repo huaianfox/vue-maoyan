@@ -11,7 +11,7 @@
 </template>
 
 <script >
-import BaseTopBar from "@/components/topbar/base"
+import BaseTopBar from '@/components/topbar/base'
 
 export default {
   data () {

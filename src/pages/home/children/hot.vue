@@ -68,7 +68,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang='scss' scoped>
 @import '../../../scss/fn.scss';
-.inner {
+ de.inner {
   padding: 0 15px;
   background: #fff;
 }

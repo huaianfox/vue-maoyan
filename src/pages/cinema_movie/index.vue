@@ -18,9 +18,8 @@
 </template>
 
 <script >
-import { getMovieDetail, getFilterCinema, postMovie } from '@/api'
+import { getMovieDetail, getFilterCinema } from '@/api'
 import { getDay } from '@/util/date'
-import { throttle } from '@/util'
 import Navbar from '@/components/navbar'
 import MovieDetail from '@/components/movieDetail'
 import Date from './components/date'

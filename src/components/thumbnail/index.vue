@@ -36,7 +36,7 @@ export default {
       status: {
         1: { tag: 'wantsee', act: '想看' },
         3: { tag: '', act: '购票' },
-        4: { tag: 'presell', act: '预售'},
+        4: { tag: 'presell', act: '预售' },
       }
     }
   },
