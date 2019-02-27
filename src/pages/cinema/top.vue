@@ -1,7 +1,7 @@
 <template>
   <BaseTopBar :styles="bg">
     <router-link
-      to="search?searchtype=cinema&$from=canary"
+      :to="{name: 'search', params: {searchType: 'cinema'}}"
       solt="search"
       class="movie-search iconfont icon-search"
     >

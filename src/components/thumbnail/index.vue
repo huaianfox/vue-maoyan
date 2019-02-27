@@ -16,7 +16,7 @@
            class="movie-wantsee ellipsis">
         <span class='person'>{{movie.wish}}</span> 人想看</div>
       <div class="movie-actor ellipsis">主演：{{movie.star}}</div>
-      <div class="movie-show ellipsis">{{movie.showInfo}}</div>
+      <div class="movie-show ellipsis">{{showInfo}}</div>
     </div>
     <div class="buy-action">
       <div class='sell'
@@ -36,7 +36,7 @@ export default {
       status: {
         1: { tag: 'wantsee', act: '想看' },
         3: { tag: '', act: '购票' },
-        4: { tag: 'presell', act: '预售' },
+        4: { tag: 'presell', act: '预售' }
       }
     }
   },
@@ -48,6 +48,9 @@ export default {
   computed: {
     action () {
       return this.status[this.movie.showst]
+    },
+    showInfo () {
+      return this.movie.showInfo || `${this.movie.rt} 上映`
     }
   },
   methods: {
@@ -62,8 +65,6 @@ export default {
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang='scss'>
 @import './index.scss';
 </style>

@@ -2,13 +2,11 @@
   <section class="panel">
     <TopBar class="top" />
     <router-view></router-view>
-    <InfiniteLoading />
   </section>
 </template>
 
 <script>
 import TopBar from './top'
-import InfiniteLoading from 'vue-infinite-loading'
 
 export default {
   name: 'Home',
@@ -16,8 +14,7 @@ export default {
     this.$store.commit('changePageTitle', '猫眼电影')
   },
   components: {
-    TopBar,
-    InfiniteLoading
+    TopBar
   }
 }
 </script>

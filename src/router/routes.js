@@ -68,6 +68,7 @@ const city = {
 }
 
 const search = {
+  name: 'search',
   path: '/search',
   component: _import('search')
 }

@@ -12,6 +12,7 @@
       <div class="cancel">取消</div>
     </div>
     <ResultHistory />
+    <Result :result="result" />
   </div>
 </template>
 
@@ -19,6 +20,8 @@
 import Navbar from '@/components/navbar'
 import { getSearch } from '@/api'
 import ResultHistory from './components/history'
+import Result from './components/result'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Search',
@@ -28,14 +31,26 @@ export default {
       searchType: {
         movie: 1,
         cinema: 2
+      },
+      result: {
+        data: [],
+        type: 1
       }
     }
   },
   computed: {
-    type () {
-      const st = this.$route.params.searchtype || ''
-      return this.searchType[st]
+    ...mapState(['city']),
+    cityId () {
+      return this.city.ci
+    },
+    style () {
+      return this.$route.params.searchType
+    },
+    styleId () {
+      return this.searchType[this.type]
     }
+  },
+  created () {
   },
   methods: {
     handleSearchInput (e) {
@@ -43,7 +58,7 @@ export default {
         params: {
           kw: this.searchText,
           cityId: 42,
-          style: this.type
+          style: 1
         }
       }).then(data => {
         console.log(data)
@@ -52,7 +67,8 @@ export default {
   },
   components: {
     Navbar,
-    ResultHistory
+    ResultHistory,
+    Result
   }
 }
 </script>

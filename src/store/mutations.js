@@ -20,5 +20,11 @@ export default {
   },
   getMovieById (state, id) {
     return state.detailMovie[id]
+  },
+  setDates (state, dates) {
+    state.dates = dates
+  },
+  changeDay (state, day) {
+    state.day = day
   }
 }

@@ -1,23 +1,28 @@
 <template>
   <div class="days">
     <ul class="content">
-      <li class="day">今天02月19日</li>
-      <li class="day">今天02月19日</li>
-      <li class="day">今天02月19日</li>
-      <li class="day">今天02月19日</li>
-      <li class="day">今天02月19日</li>
-      <li class="day">今天02月19日</li>
-      <li class="day">今天02月19日</li>
+      <li class="day"
+          :class="day === item.date ? 'choosen': ''"
+          v-for="item in dates"
+          :key="item.date"
+          @click="changeDay(item.date)"
+          >{{item.date}}</li>
     </ul>
   </div>
 </template>
 
 <script >
+import { mapState, mapMutations } from 'vuex'
 export default {
   data () {
     return {}
   },
-  components: {}
+  computed: {
+    ...mapState(['dates', 'day'])
+  },
+  methods: {
+    ...mapMutations(['changeDay'])
+  }
 }
 </script>
 
@@ -46,6 +51,18 @@ export default {
     text-align: center;
     list-style: none;
     color: #666;
+  }
+  .choosen {
+    border-bottom: 2px solid #f03d37;
+    color: #f03d37;
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 3px;
+      width: 100%;
+      border-bottom: #f03d37 2px solid;
+    }
   }
 }
 </style>

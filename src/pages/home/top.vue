@@ -10,7 +10,7 @@
       >{{item.title}}</div>
     </div>
     <router-link
-      to="search?searchtype=movie&$from=canary"
+      :to="{name: 'search', params: {searchType: 'movie'}}"
       solt="search"
       class="movie-search iconfont icon-search"
     ></router-link>

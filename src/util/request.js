@@ -1,7 +1,6 @@
 import Axios from 'axios'
 const defaultConfig = {
-  baseURL: '/',
-  timeout: 1000
+  baseURL: '/'
 }
 
 const STATUS_CODE = 200

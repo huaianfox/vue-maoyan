@@ -5,7 +5,7 @@
       v-for="(tab) in tabs"
       :key="tab.icon"
       :to="tab.path"
-      :class="$route.path === tab.path || tab.alias ? 'active' : ''"
+      :class="$route.path === tab.alias || tab.path ? 'active' : ''"
       exact
     >
       <div :class='"nav-icon iconfont icon-" +tab.icon'>

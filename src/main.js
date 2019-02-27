@@ -16,7 +16,11 @@ Vue.use(VueLazyload, {
 })
 
 Vue.use(infiniteScroll)
-Vue.use(InfiniteLoading)
+Vue.use(InfiniteLoading, {
+  slots: {
+    noMore: '我也是有底线的'
+  }
+})
 
 new Vue({
   router,

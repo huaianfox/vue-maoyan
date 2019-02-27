@@ -1,14 +1,10 @@
 <template>
-  <div
-    class="cinema-wrapper"
-    v-show="cinemas.length"
-  >
-    <router-link
-      :to="`/shows/${cinema.id}`"
-      class="cinema-info"
-      v-for="(cinema) in cinemas"
-      :key="cinema.id"
-    >
+  <div class="cinema-wrapper"
+       v-show="cinemaList.length">
+    <router-link :to="`/shows/${cinema.id}`"
+                 class="cinema-info"
+                 v-for="(cinema) in cinemaList"
+                 :key="cinema.id">
       <div class="cinema-title">
         <p class="ellipsis">{{cinema.nm}}</p>
         <span class="price">
@@ -21,15 +17,11 @@
         <span class="distance">{{cinema.distance}}</span>
       </div>
       <div class="cinema-label ellipsis"></div>
-      <div
-        class="cinema-discount ellipsis"
-        v-if="cinema.promotion.cardPromotionTag"
-      >
+      <div class="cinema-discount ellipsis"
+           v-if="cinema.promotion.cardPromotionTag">
         <span class="cinema-discount-label">
-          <img
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAeCAYAAABNChwpAAAAAXNSR0IArs4c6QAAAgFJREFUSA3Nlz1LA0EQhmf3kouFEQwi+FEYQ+xEsImFoCDoL/CLaKd/QbC0sbCzFVuxsRS1jEVAsUqrIILRQAhaBGKMuawzwpGAm83mNhddCHfZnd3n3Z2ZuxsG2JI3YtQpVw6AiTkhYJj6/GqMwSsIdm312DsnMyzLCF79rGRAiIhfUOm6jL0FQvZU4Gfn0GU4KcINE5vjsc9LFXajE9kcfT7UDZaMQWwuG9Dpi/YyiIWZjqnSxrOAtWgANsYDysV1Bj0L0Flcx8ZoC1F0wf50UMo5fqjCY1FIxxo7jQSUHWgK+ag2YprfGwnIlQTQTk3a/46B2UEOIUu+v0gIIMgZLLTIZHJTOl+TL4K9ShckMc36Q+pc356QB6FLLJQFCqi4f39d2WoKLTy03ckg2OjAvcyXh9n1KX8eA0YC4n0MtuLoJru+o3bvjAS8o2vpfXCYsGEzZkFYHQ5SbcoglM5o6KQAoxhIDHBYiVqYERZcZB04f3aghNGv04wEuIDbQg3u8Lc4YsHymAVLeD17cuDypbWKjgggIZTpVwhM5x1YxzdlpaaXXB0T4J5GEbPy6F7/8WwUhC7U5OpZgIPfU5qnrNTn+UmoXLWNQc8n0AZDacqxUskpLXwcJDbHMinlI0O9NLI51WiAZZLa0odRZBKbU4FINRoDdtoNdxCDWMQk9jePWpE8hVOLbwAAAABJRU5ErkJggg=="
-            alt
-          >
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAeCAYAAABNChwpAAAAAXNSR0IArs4c6QAAAgFJREFUSA3Nlz1LA0EQhmf3kouFEQwi+FEYQ+xEsImFoCDoL/CLaKd/QbC0sbCzFVuxsRS1jEVAsUqrIILRQAhaBGKMuawzwpGAm83mNhddCHfZnd3n3Z2ZuxsG2JI3YtQpVw6AiTkhYJj6/GqMwSsIdm312DsnMyzLCF79rGRAiIhfUOm6jL0FQvZU4Gfn0GU4KcINE5vjsc9LFXajE9kcfT7UDZaMQWwuG9Dpi/YyiIWZjqnSxrOAtWgANsYDysV1Bj0L0Flcx8ZoC1F0wf50UMo5fqjCY1FIxxo7jQSUHWgK+ag2YprfGwnIlQTQTk3a/46B2UEOIUu+v0gIIMgZLLTIZHJTOl+TL4K9ShckMc36Q+pc356QB6FLLJQFCqi4f39d2WoKLTy03ckg2OjAvcyXh9n1KX8eA0YC4n0MtuLoJru+o3bvjAS8o2vpfXCYsGEzZkFYHQ5SbcoglM5o6KQAoxhIDHBYiVqYERZcZB04f3aghNGv04wEuIDbQg3u8Lc4YsHymAVLeD17cuDypbWKjgggIZTpVwhM5x1YxzdlpaaXXB0T4J5GEbPy6F7/8WwUhC7U5OpZgIPfU5qnrNTn+UmoXLWNQc8n0AZDacqxUskpLXwcJDbHMinlI0O9NLI51WiAZZLa0odRZBKbU4FINRoDdtoNdxCDWMQk9jePWpE8hVOLbwAAAABJRU5ErkJggg=="
+               alt />
         </span>
         {{cinema.promotion.cardPromotionTag}}
       </div>
@@ -39,29 +31,32 @@
 
 <script >
 import { postMovie } from '@/api'
-import { getDay } from '@/util/date'
-
+import { mapState, mapMutations } from 'vuex'
 export default {
   data () {
     return {
-      cinemas: []
+      cinemaList: []
     }
   },
   props: {
     movieId: {
       type: Number,
-      default: 0
+      default () {
+        return []
+      }
     }
   },
-  activated () {
-    const movieId = this.movieId
+  computed: {
+    ...mapState(['day'])
+  },
+  mounted () {
     postMovie({
       params: {
-        postMovie: '1550556498969'
+        forceUpdate: Date.now()
       },
       data: {
-        movieId,
-        day: getDay(),
+        movieId: 410629,
+        day: this.day,
         offset: 0,
         limit: 20,
         districtId: -1,
@@ -72,12 +67,16 @@ export default {
         areaId: -1,
         stationId: -1,
         updateShowDay: true,
-        reqId: 1550556495951,
-        cityId: 42
+        reqId: 1551257222493,
+        cityId: 10
       }
     }).then(data => {
-      this.cinemas = data.cinemas
+      this.cinemaList = data.cinemas
+      this.setDates(data.showDays.dates)
     })
+  },
+  methods: {
+    ...mapMutations(['setDates'])
   }
 }
 </script>

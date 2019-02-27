@@ -7,40 +7,40 @@
         <ul class="most-expected-list"
             v-infinite-scroll="loadMoreMostExpected"
             infinite-scroll-disabled="expectLoding"
-            infinite-scroll-distance="80">
-          <li class="movie-item"
-              v-for="(item, key) in expectList"
-              :key="key">
+            infinite-scroll-distance="20">
+          <router-link class="movie-item"
+                       tag="li"
+                       v-for="(item, key) in expectList"
+                       :to="'movie/' + item.id"
+                       :key="key">
             <div class="poster">
               <img :src="item.img"
-                   onerror="this.style.visibility='hidden'">
+                   onerror="this.style.visibility='hidden'" />
+              <span class="wish">{{item.wish}} 人想看</span>
             </div>
             <h5 class="title">{{item.nm}}</h5>
             <p class="date">{{item.comingTitle}}</p>
-          </li>
+          </router-link>
         </ul>
       </div>
     </div>
-    <div class="comming-group"
-         v-infinite-scroll="loadMoreComingList"
-         infinite-scroll-disabled="comingLoding"
-         infinite-scroll-distance="0">
+    <div class="comming-group">
       <div class="movie-group"
-           v-for="(item) in comingList"
+           v-for="item in comingList"
            :key="item.comingTitle">
         <p class="group-date">{{item.comingTitle}}</p>
-        <router-link v-for="movie in item.data"
-                     :key="movie.id"
-                     :to="'movie' + movie.id">
-          <Thumbnail :movie="movie" />
-        </router-link>
+        <List :path='path'
+              :list='item.data' />
       </div>
+      <infinite-loading @infinite="infiniteHandler">
+        <div slot="no-more">哦，没有更多电影了</div>
+      </infinite-loading>
     </div>
   </section>
 </template>
 
 <script>
-import Thumbnail from '@/components/thumbnail'
+import List from '../components/list'
 import { getMostExpected, getComingListAction } from '@/api'
 import { setImgSize } from '@/util'
 
@@ -48,6 +48,8 @@ export default {
   name: 'Coming',
   data () {
     return {
+      path: 'movie/',
+      expectLoding: false,
       comingList: {},
       expectList: [],
       expectedConfig: {
@@ -69,16 +71,19 @@ export default {
     }
   },
   components: {
-    Thumbnail
+    List
   },
   created () {
   },
   methods: {
     loadMoreMostExpected () {
-      this.expectLoding = true
       const expectedConfig = this.expectedConfig
       const { hasMore, total, ...params } = expectedConfig
-      if (!hasMore) return
+      if (!hasMore) {
+        this.expectLoding = false
+        return
+      }
+      // this.expectLoding = true
       getMostExpected({ params }).then(data => {
         const { coming, paging } = data
         expectedConfig.total = paging.total
@@ -89,8 +94,7 @@ export default {
         this.expectLoding = false
       })
     },
-    loadMoreComingList () {
-      this.comingLoding = true
+    infiniteHandler ($state) {
       const comingConfig = this.comingConfig
       const { offset, total, movieIds, limit, ...params } = comingConfig
       const isFirst = offset === 0
@@ -108,10 +112,14 @@ export default {
         }
         return coming
       }).then(list => {
-        comingConfig.offset += list.length
-        const cominglist = setImgSize(list)
-        this.divideList(cominglist)
-        this.comingLoding = false
+        if (list.length) {
+          comingConfig.offset += list.length
+          const cominglist = setImgSize(list)
+          this.divideList(cominglist)
+          $state.loaded()
+        } else {
+          $state.complete()
+        }
       })
     },
     divideList (list) {
