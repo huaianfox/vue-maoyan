@@ -1,7 +1,7 @@
 <template>
   <div class="cinema-wrapper"
        v-show="cinemaList.length">
-    <router-link :to="`/shows/${cinema.id}`"
+    <router-link :to="{name: 'shows', params: {id: cinema.id}}"
                  class="cinema-info"
                  v-for="(cinema) in cinemaList"
                  :key="cinema.id">

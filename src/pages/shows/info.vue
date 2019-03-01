@@ -1,8 +1,8 @@
 <template>
   <div class="cinema-info">
     <div class="info">
-      <p class="title ellipsis">中影数字曙光国际影城(淮海东路店)</p>
-      <p class="addr ellipsis">清江浦区淮海东路126号淮海第一城新天地广场4层（曙光国际大酒店东侧）</p>
+      <p class="title ellipsis">{{info.nm}}</p>
+      <p class="addr ellipsis">{{info.addr}}</p>
     </div>
     <div class="location">
       <i class="iconfont icon-pos"></i>
@@ -12,8 +12,13 @@
 
 <script >
 export default {
-  data () {
-    return {}
+  props: {
+    info: {
+      type: Object,
+      default () {
+        return {}
+      }
+    }
   }
 }
 </script>

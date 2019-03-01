@@ -33,5 +33,8 @@ export const getFilterCinemas = request('/filterCinemas')
 // 电影播放的影院
 export const postMovie = request('/movie', 'post')
 
+// 影院电影
+export const getCinemaDetail = request('/cinemaDetail')
+
 // 搜索
 export const getSearch = request('/search')

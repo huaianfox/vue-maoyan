@@ -75,6 +75,7 @@ const search = {
 
 // 影院电影展示 cinema_id
 const shows = {
+  name: 'shows',
   path: '/shows/:id',
   component: _import('shows'),
   meta: { navbarFixed: false }

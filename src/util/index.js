@@ -15,6 +15,8 @@ export const setImgSize = (list, sizes = '128.180') => {
   })
 }
 
+export const getImg = size => img => img.replace('w.h', size)
+
 // 选择第一次加载数据，还是加载更多
 // isFirst @type boolean
 export const getDataByAction = (initAction, nextAction) => (isFirst) => isFirst ? initAction : nextAction
