@@ -12,5 +12,7 @@ export default {
   day,
   cityHistory,
   dates: [],
-  filters
+  filters,
+  cinemaListData: {},
+  cinemas: []
 }

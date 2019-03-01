@@ -31,7 +31,9 @@ export default {
   methods: {
     ...mapMutations(['changeFilter']),
     choose (brandId) {
-      this.changeFilter({ brandId })
+      this.changeFilter({ brandId, offset: 0 })
+      this.$store.dispatch('getCinemaList')
+      this.$emit('close')
     }
   }
 }

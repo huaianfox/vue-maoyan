@@ -16,8 +16,10 @@
               :regions="regions"
               @close="closeChoosed" />
       <Brand v-if="selected === 'brand'"
+             @close="closeChoosed"
              :brands="brands" />
       <Special v-if="selected === 'special'"
+               @close="closeChoosed"
                :specials="specials" />
     </div>
   </section>

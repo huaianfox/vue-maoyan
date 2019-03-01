@@ -16,7 +16,10 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang='scss'>
+<style scoped lang='scss'>
+.pages {
+  height: 100%;
+}
 .panel {
   padding-bottom: 50px;
 }

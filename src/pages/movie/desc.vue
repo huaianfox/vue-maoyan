@@ -1,9 +1,9 @@
 <template>
   <div class="desc">
     <router-link class="buy-link"
-                 :to="'/cinema/movie/'+ movie.id">特惠购票</router-link>
+                 :to="'/cinema/movie/'+ detail.id">特惠购票</router-link>
     <div class="text"
-         :class="{'text-ellipsis': shrink}">{{movie.dra}}</div>
+         :class="{'text-ellipsis': shrink}">{{detail.dra}}</div>
     <div @click="shrink=!shrink"
          class="text-expander-button iconfont icon-back"
          :class="{down: shrink}"></div>
@@ -11,26 +11,19 @@
 </template>
 
 <script >
-import { mapState } from 'vuex'
 
 export default {
   data () {
     return {
-      id: 0,
       shrink: true
     }
   },
-  computed: {
-    ...mapState(['detailMovie']),
-    movie () {
-      const movies = this.detailMovie
-      return (movies && movies[this.id]) || {}
-    }
+  props: {
+    detail: Object
   },
   created () {
     this.id = this.$route.params.id
-  },
-  components: {}
+  }
 }
 </script>
 

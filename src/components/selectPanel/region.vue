@@ -100,8 +100,8 @@ export default {
         params[item.subType] = item.subIndex
       })
       this.changeFilter({ ...params })
-      console.log(params)
       this.$emit('close')
+      this.$store.dispatch('getCinemaList')
     }
   },
   components: {

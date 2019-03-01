@@ -16,16 +16,11 @@
 <script>
 export default {
   name: 'Navbar',
-  data () {
-    return {
-      defaultTitle: '猫眼电影'
-    }
-  },
   props: {
     msg: String,
     title: {
       type: String,
-      default: '猫眼电影'
+      default: ''
     },
     back: {
       type: Boolean,

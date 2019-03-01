@@ -25,7 +25,7 @@ export default {
   },
   computed: {
     currentRoute () {
-      const path =this.$route.path
+      const path = this.$route.path
       return path === '/release' ? '/' : path
     }
   }
@@ -44,6 +44,7 @@ export default {
   text-align: center;
   background: #fff;
   border-top: 0.5px solid #d8d8d8;
+  z-index: 999;
 
   .nav-icon-wrapper {
     flex: 1;

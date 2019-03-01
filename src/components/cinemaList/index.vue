@@ -30,8 +30,8 @@
 </template>
 
 <script >
-import { postMovie } from '@/api'
-import { mapState, mapMutations } from 'vuex'
+// import { postMovie } from '@/api'
+import { mapMutations } from 'vuex'
 export default {
   data () {
     return {
@@ -44,9 +44,6 @@ export default {
         return []
       }
     }
-  },
-  computed: {
-    ...mapState(['day'])
   },
   mounted () {
     // postMovie({

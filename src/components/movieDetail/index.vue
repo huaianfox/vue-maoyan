@@ -1,55 +1,67 @@
 <template>
-  <div class="movie-detail"
-       v-if="loaded">
+  <div class="movie-detail">
     <div class="cover"
          :style="cover"></div>
     <div class="detail">
       <div class="poster">
-        <router-link tag="div"
-                     class="movie-preview"
-                     v-if="show"
-                     :to="'/movie/'+ detailMovie.id + '/preview'" />
-        </router-link>
         <img :src="poster"
              alt />
       </div>
       <div class="content">
-        <div class="title ellipsis">{{detailMovie.nm}}</div>
-        <div class="p1 ellipsis">{{detailMovie.enm}}</div>
+        <div class="title ellipsis">{{detail.nm}}</div>
+        <div class="p1 ellipsis">{{detail.enm}}</div>
         <div class="score ellipsis p1">
-          <span :class="{stars:show}">
-            <span v-if="show">
-              <img v-for="(star, key) in stars"
-                   :key="key"
-                   :src="star"
-                   alt="">
-            </span>
-            <span class="num">{{detailMovie.sc}}</span>
-          </span>
+          <span class="num">{{detail.sc}}</span>
           <span class="p1">（{{num}}万人评）</span>
         </div>
-        <div class="p1 ellipsis">{{detailMovie.cat}}</div>
-        <div class="p1 ellipsis">{{detailMovie.src}}</div>
-        <div class="p1 ellipsis">{{detailMovie.pubDesc}}</div>
+        <div class="p1 ellipsis">{{detail.cat}}</div>
+        <div class="p1 ellipsis">{{detail.src}}</div>
+        <div class="p1 ellipsis">{{detail.pubDesc}}</div>
       </div>
-      <router-link v-if="!show"
-                   :to="'/movie/'+ detailMovie.id"
-                   class="iconfont icon-arrow-right" />
+      <router-link v-if="link"
+                   :to="'/movie/'+ detail.id"
+                   class="arrow-right">
+        <i class="iconfont icon-arrow-right"></i>
+      </router-link>
     </div>
+    <!-- <div class="cover" :style="cover"></div>
+    <div class="detail">
+      <div class="poster">
+        <div class="movie-preview"
+             v-if="show"
+             :to="'/movie/'+ detail.id + '/preview'" /></div>
+            <img :src="poster" alt /></div>
+    <div class="content">
+      <div class="title ellipsis">{{detail.nm}}</div>
+      <div class="p1 ellipsis">{{detail.enm}}</div>
+      <div class="score ellipsis p1">
+        <span :class="{stars:show}">
+          <span v-if="show">
+            <img v-for="(star, key) in stars"
+                 :key="key"
+                 :src="star"
+                 alt="">
+          </span>
+          <span class="num">{{detail.sc}}</span>
+        </span>
+        <span class="p1">（{{num}}万人评）</span>
+      </div>
+      <div class="p1 ellipsis">{{detail.cat}}</div>
+      <div class="p1 ellipsis">{{detail.src}}</div>
+      <div class="p1 ellipsis">{{detail.pubDesc}}</div>
+    </div>
+    <router-link v-if="!show"
+                 :to="'/movie/'+ detail.id"
+                 class="iconfont icon-arrow-right" /> -->
   </div>
 </template>
 
 <script >
 import { setSize } from '@/util'
-import { getMovieDetail } from '@/api'
-import { mapMutations } from 'vuex'
 
 export default {
   data () {
     return {
-      show: false,
-      loaded: false,
-      detailMovie: {},
       scores: [],
       fullStar: '//s0.meituan.net/bs/?f=react-canary:/img/star-full-new.png',
       half: '//s0.meituan.net/bs/?f=react-canary:/img/star-half-new.png',
@@ -57,6 +69,16 @@ export default {
     }
   },
   props: {
+    detail: {
+      type: Object,
+      default () {
+        return {}
+      }
+    },
+    link: {
+      type: Boolean,
+      default: true
+    }
   },
   computed: {
     cover () {
@@ -68,11 +90,11 @@ export default {
       return this.setSize('148.208')
     },
     num () {
-      return parseInt(this.detailMovie.snum / 10000)
+      return parseInt(this.detail.snum / 10000)
     },
     stars () {
-      const sc = parseInt(this.detailMovie.sc)
-      const end = sc - this.detailMovie.sc > 0.5 ? 1 : 0
+      const sc = parseInt(this.detail.sc)
+      const end = sc - this.detail.sc > 0.5 ? 1 : 0
       const start = 10 - sc
       return this.scores.slice(start - end, 6)
     }
@@ -84,22 +106,11 @@ export default {
     this.scores = fullStars.concat(half, whites)
 
     this.show = this.$route.name !== 'cinema_movie'
-    console.log(this.$route.name)
-  },
-  activated () {
-    const movieId = this.$route.params.id
-    getMovieDetail({ params: { movieId } }).then(data => {
-      this.detailMovie = data.detailMovie
-      this.updateDetailMovie(this.detailMovie)
-      this.loaded = true
-      // this.$store.commit('changePageTitle', this.detailMovie.nm)
-    })
   },
   methods: {
     setSize (size) {
-      return setSize(this.detailMovie.img || '')(size)
-    },
-    ...mapMutations(['updateDetailMovie'])
+      return setSize(this.detail.img || '')(size)
+    }
   }
 }
 </script>
@@ -135,10 +146,9 @@ export default {
   .detail {
     display: flex;
     align-items: center;
-    width: 100%;
     height: 100%;
     height: 150px;
-    padding: 19px 0 19px 15px;
+    padding: 19px 10px 19px 15px;
     .poster {
       position: relative;
       width: 110px;
@@ -179,6 +189,8 @@ export default {
   }
   .content {
     flex: 1;
+    align-items: center;
+    justify-content: center;
     overflow-x: hidden;
     margin-left: 12.5px;
     line-height: 1;
@@ -211,10 +223,12 @@ export default {
       }
     }
   }
-  .icon-arrow-right {
+  .arrow-right {
     display: block;
-    width: 60px;
+    width: 40px;
+    height: 100px;
     color: #fff;
+    line-height: 100px;
     text-align: center;
   }
 }

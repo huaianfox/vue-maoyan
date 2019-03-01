@@ -60,7 +60,8 @@ export default {
       })
     },
     confirm () {
-      console.log('confirm')
+      this.$store.dispatch('getCinemaList')
+      this.$emit('close')
     }
   }
 }

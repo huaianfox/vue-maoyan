@@ -1,7 +1,7 @@
 <template>
   <div class="thumb">
     <div class="avatar">
-      <img :src="movie.img"
+      <img v-lazy="movie.img"
            alt="">
     </div>
     <div class="info">

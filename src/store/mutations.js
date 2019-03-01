@@ -40,5 +40,15 @@ export default {
   },
   resetFilter (state) {
     state.filters = filters
+  },
+  initCinemaList (state, data) {
+    const { filters } = state
+    // state.cinemas = data.cinemas
+    if (filters.offset === 0) {
+      state.cinemaListData = data
+      state.cinemas = data.cinemas
+    } else {
+      state.cinemas = [...state.cinemas, ...data.cinemas]
+    }
   }
 }

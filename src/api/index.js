@@ -23,7 +23,8 @@ export const getMostExpected = request('/mostExpected')
 const getInitComingList = request('/comingList')
 const getmoreComingList = request('/moreComingList')
 export const getComingListAction = getDataByAction(getInitComingList, getmoreComingList)
-
+// 影院
+export const getCinemaList = request('/cinemaList')
 // 电影详情(cinema-movie)
 export const getMovieDetail = request('/detailmovie')
 

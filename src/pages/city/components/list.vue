@@ -10,7 +10,7 @@
              v-if="!hasHistory">暂无</div>
         <div class="item"
              v-for="(item, key) in cityHistory"
-             @click="handleCityClick(city)"
+             @click="handleCityClick(item)"
              :key="key">
           {{item.nm}}
         </div>
@@ -69,7 +69,6 @@ export default {
   computed: {
     ...mapState(['city', 'cityHistory']),
     hasHistory () {
-      console.log(this.cityHistory)
       return Object.keys(this.cityHistory).length
     }
   },
@@ -85,7 +84,9 @@ export default {
     handleCityClick (city) {
       this.changeCity(city)
       this.addCityHistory(city)
+      console.log(city)
       this.$router.replace('/')
+      location.reload()
     },
     ...mapMutations(['changeCity', 'addCityHistory'])
   },

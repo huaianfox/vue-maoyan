@@ -16,8 +16,11 @@ export default {
   data () {
     return {}
   },
+  props: {
+    dates: Array
+  },
   computed: {
-    ...mapState(['dates', 'day'])
+    ...mapState(['day'])
   },
   methods: {
     ...mapMutations(['changeDay']),

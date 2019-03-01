@@ -1,39 +1,47 @@
 <template>
   <div class="page">
-    <Navbar title="what" />
-    <MovieDetail />
+    <Navbar :title="detail.nm" />
+    <MovieDetail v-show="detail.nm"
+                 :detail="detail" />
     <div class="choose"
          ref="fixedConetnt"
          :class="{fixed: isFixed}">
-      <Date @getCinemaListHandle="getCinemaListHandle" />
-      <SelectPanel />
+      <Date :dates="dates" />
+      <SelectPanel :filters="filters" />
     </div>
-    <CinemaList :cinemaList="cinemaList" />
+    <CinemaList :cinemaList="cinemas" />
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script >
-import { getMovieDetail, getFilterCinemas, postMovie } from '@/api'
+import { getMovieDetail, getFilterCinemas } from '@/api'
 import { getDay } from '@/util/date'
 import Navbar from '@/components/navbar'
 import MovieDetail from '@/components/movieDetail'
 import Date from './components/date'
 import SelectPanel from '@/components/selectPanel'
 import CinemaList from '@/components/cinemaList'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   data () {
     return {
       movieId: 0,
-      detailMovie: {},
+      filters: {},
+      dates: [],
+      detail: {},
       offsetHeight: 0,
       isFixed: false,
       handleThottle: null,
       cinemaList: []
     }
   },
+  computed: {
+    ...mapState(['cinemas', 'city'])
+  },
   methods: {
+    ...mapActions(['postMovie']),
     infiniteHandler ($state) {
       // $state.complete()
       // $state.loaded()
@@ -42,50 +50,22 @@ export default {
     handleScroll () {
       const top = document.documentElement.scrollTop
       this.isFixed = top > this.offsetHeight
-    },
-    getCinemaListHandle (option) {
-      postMovie({
-        params: {
-          forceUpdate: Date.now()
-        },
-        data: {
-          movieId: 410629,
-          day: this.day,
-          offset: 0,
-          limit: 20,
-          districtId: -1,
-          lineId: -1,
-          hallType: -1,
-          brandId: -1,
-          serviceId: -1,
-          areaId: -1,
-          stationId: -1,
-          updateShowDay: true,
-          reqId: 1551257222493,
-          cityId: 10,
-          ...option
-        }
-      }).then(data => {
-        console.log(data)
-      })
     }
   },
   mounted () {
     this.offsetHeight = this.$refs['fixedConetnt'].offsetTop
   },
-  activated () {
-    window.addEventListener('scroll', this.handleScroll)
-  },
-  deactivated () {
+  beforeDestroy () {
     window.removeEventListener('scroll', this.handleScroll)
   },
   created () {
-    const movieId = this.$route.params.id
-    this.movieId = +movieId
+    const movieId = +this.$route.params.id
+    this.movieId = movieId
     getMovieDetail({ params: { movieId } }).then(data => {
-      this.detailMovie = data.detailMovie
+      this.detail = data.detailMovie
     })
 
+    window.addEventListener('scroll', this.handleScroll)
     const day = getDay()
     getFilterCinemas({
       params: {
@@ -93,7 +73,11 @@ export default {
         day
       }
     }).then(data => {
-      console.log(data)
+      this.filters = data
+    })
+
+    this.postMovie({ movieId, updateShowDay: true, cityId: this.city.id }).then(data => {
+      this.dates = data.showDays.dates || []
     })
   },
   components: {
