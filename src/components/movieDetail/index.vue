@@ -92,7 +92,7 @@ export default {
       this.detailMovie = data.detailMovie
       this.updateDetailMovie(this.detailMovie)
       this.loaded = true
-      this.$store.commit('changePageTitle', this.detailMovie.nm)
+      // this.$store.commit('changePageTitle', this.detailMovie.nm)
     })
   },
   methods: {
@@ -121,7 +121,6 @@ export default {
     filter: blur(1.1rem);
     background-size: cover;
     background-repeat: no-repeat;
-    opacity: 0.55;
     z-index: -1;
     &:before {
       content: '';
@@ -130,6 +129,7 @@ export default {
       width: 100%;
       height: 100%;
       background-color: #333;
+      opacity: 0.6;
     }
   }
   .detail {

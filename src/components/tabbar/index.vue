@@ -1,13 +1,11 @@
 <template>
   <footer class='nav-wrapper'>
-    <router-link
-      class='nav-icon-wrapper'
-      v-for="(tab) in tabs"
-      :key="tab.icon"
-      :to="tab.path"
-      :class="$route.path === tab.alias || tab.path ? 'active' : ''"
-      exact
-    >
+    <router-link class='nav-icon-wrapper'
+                 v-for="(tab) in tabs"
+                 :key="tab.icon"
+                 :to="tab.path"
+                 :class="currentRoute ===  tab.path ? 'active' : ''"
+                 exact>
       <div :class='"nav-icon iconfont icon-" +tab.icon'>
       </div>
       <div class="nav-text">{{tab.title}}</div>
@@ -16,29 +14,19 @@
 </template>
 
 <script>
+import tabs from '@/config/tab'
 export default {
   name: 'Tabbar',
   data () {
     return {
       activeIndex: 0,
-      tabs: [
-        {
-          path: '/',
-          alias: 'release',
-          title: '电影',
-          icon: 'movie'
-        },
-        {
-          path: '/cinema',
-          title: '影院',
-          icon: 'cinema'
-        },
-        {
-          path: '/profile',
-          title: '我的',
-          icon: 'profile'
-        }
-      ]
+      tabs: [...tabs]
+    }
+  },
+  computed: {
+    currentRoute () {
+      const path =this.$route.path
+      return path === '/release' ? '/' : path
     }
   }
 }
@@ -59,7 +47,7 @@ export default {
 
   .nav-icon-wrapper {
     flex: 1;
-    &.active.router-link-exact-active {
+    &.active {
       color: #f03d37;
     }
   }

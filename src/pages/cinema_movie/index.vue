@@ -1,22 +1,20 @@
 <template>
   <div class="page">
-    <Navbar :title="detailMovie.nm" />
+    <Navbar title="what" />
     <MovieDetail />
     <div class="choose"
          ref="fixedConetnt"
          :class="{fixed: isFixed}">
-      <Date />
+      <Date @getCinemaListHandle="getCinemaListHandle" />
       <SelectPanel />
     </div>
-    <CinemaList :movieId="movieId" />
-    <infinite-loading>
-      <div slot="no-results">No results message</div>
-    </infinite-loading>
+    <CinemaList :cinemaList="cinemaList" />
+    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script >
-import { getMovieDetail, getFilterCinema, postMovie } from '@/api'
+import { getMovieDetail, getFilterCinemas, postMovie } from '@/api'
 import { getDay } from '@/util/date'
 import Navbar from '@/components/navbar'
 import MovieDetail from '@/components/movieDetail'
@@ -39,10 +37,37 @@ export default {
     infiniteHandler ($state) {
       // $state.complete()
       // $state.loaded()
+      // this.getCinemaListHandle({})
     },
     handleScroll () {
       const top = document.documentElement.scrollTop
       this.isFixed = top > this.offsetHeight
+    },
+    getCinemaListHandle (option) {
+      postMovie({
+        params: {
+          forceUpdate: Date.now()
+        },
+        data: {
+          movieId: 410629,
+          day: this.day,
+          offset: 0,
+          limit: 20,
+          districtId: -1,
+          lineId: -1,
+          hallType: -1,
+          brandId: -1,
+          serviceId: -1,
+          areaId: -1,
+          stationId: -1,
+          updateShowDay: true,
+          reqId: 1551257222493,
+          cityId: 10,
+          ...option
+        }
+      }).then(data => {
+        console.log(data)
+      })
     }
   },
   mounted () {
@@ -60,8 +85,9 @@ export default {
     getMovieDetail({ params: { movieId } }).then(data => {
       this.detailMovie = data.detailMovie
     })
+
     const day = getDay()
-    getFilterCinema({
+    getFilterCinemas({
       params: {
         movieId,
         day
@@ -70,32 +96,6 @@ export default {
       console.log(data)
     })
   },
-  // activated () {
-  //   const movieId = this.movieId
-  //   postMovie({
-  //     params: {
-  //       forceUpdate: Date.now()
-  //     },
-  //     data: {
-  //       movieId,
-  //       day: getDay(),
-  //       offset: 0,
-  //       limit: 20,
-  //       districtId: -1,
-  //       lineId: -1,
-  //       hallType: -1,
-  //       brandId: -1,
-  //       serviceId: -1,
-  //       areaId: -1,
-  //       stationId: -1,
-  //       updateShowDay: true,
-  //       reqId: 1551257222493,
-  //       cityId: 10
-  //     }
-  //   }).then(data => {
-  //     this.cinemaList = data.cinemas
-  //   })
-  // },
   components: {
     Navbar,
     MovieDetail,

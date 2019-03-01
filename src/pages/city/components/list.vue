@@ -6,7 +6,14 @@
         <div class="item">{{city.nm}}</div>
       </Panel>
       <Panel title="最近访问城市">
-        <div class="item">定位失败，请点击重试</div>
+        <div class="item"
+             v-if="!hasHistory">暂无</div>
+        <div class="item"
+             v-for="(item, key) in cityHistory"
+             @click="handleCityClick(city)"
+             :key="key">
+          {{item.nm}}
+        </div>
       </Panel>
       <Panel title="热门城市">
         <div class="item"
@@ -60,7 +67,11 @@ export default {
     Panel
   },
   computed: {
-    ...mapState(['city'])
+    ...mapState(['city', 'cityHistory']),
+    hasHistory () {
+      console.log(this.cityHistory)
+      return Object.keys(this.cityHistory).length
+    }
   },
   watch: {
     letter () {
@@ -73,9 +84,10 @@ export default {
   methods: {
     handleCityClick (city) {
       this.changeCity(city)
-      this.$router.push('/')
+      this.addCityHistory(city)
+      this.$router.replace('/')
     },
-    ...mapMutations(['changeCity'])
+    ...mapMutations(['changeCity', 'addCityHistory'])
   },
   mounted () {
     this.scroll = new BScroll(this.$refs.wrapper, {

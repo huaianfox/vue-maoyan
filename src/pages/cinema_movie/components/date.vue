@@ -5,8 +5,7 @@
           :class="day === item.date ? 'choosen': ''"
           v-for="item in dates"
           :key="item.date"
-          @click="changeDay(item.date)"
-          >{{item.date}}</li>
+          @click="selectDay(item.date)">{{item.date}}</li>
     </ul>
   </div>
 </template>
@@ -21,7 +20,11 @@ export default {
     ...mapState(['dates', 'day'])
   },
   methods: {
-    ...mapMutations(['changeDay'])
+    ...mapMutations(['changeDay']),
+    selectDay (day) {
+      this.changeDay(day)
+      this.$emit('getCinemaListHandle', { day })
+    }
   }
 }
 </script>

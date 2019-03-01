@@ -10,10 +10,24 @@
            :class="selected===tab.name?'active':''"
            @click="choose(tab)">{{tab.text}}</div>
     </nav>
+    <div class="tab-content"
+         v-if="selected">
+      <Region v-if="selected === 'region'"
+              :regions="regions"
+              @close="closeChoosed" />
+      <Brand v-if="selected === 'brand'"
+             :brands="brands" />
+      <Special v-if="selected === 'special'"
+               :specials="specials" />
+    </div>
   </section>
 </template>
 
 <script >
+import Region from './region'
+import Brand from './brand'
+import Special from './special'
+
 export default {
   data () {
     return {
@@ -34,7 +48,36 @@ export default {
       ]
     }
   },
-  components: {},
+  computed: {
+    regions () {
+      const { district, subway } = this.filters
+      return {
+        district,
+        subway
+      }
+    },
+    brands () {
+      const { brand } = this.filters
+      return {
+        ...brand
+      }
+    },
+    specials () {
+      const { service, hallType } = this.filters
+      return [
+        { ...service, type: 'serviceId' },
+        { ...hallType, type: 'hallType' }
+      ]
+    }
+  },
+  components: {
+    Region,
+    Brand,
+    Special
+  },
+  props: {
+    filters: Object
+  },
   methods: {
     choose (tab) {
       this.selected = tab.name
@@ -107,5 +150,11 @@ $selectedColor: #e54847;
   width: 100%;
   z-index: -1;
   background: rgba(0, 0, 0, 0.3);
+}
+.tab-content {
+  position: relative;
+  width: 100%;
+  background: #fff;
+  z-index: 100;
 }
 </style>

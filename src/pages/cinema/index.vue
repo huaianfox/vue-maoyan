@@ -1,22 +1,33 @@
 <template>
   <div class="panel">
+    <NavBar title="影院" />
     <TopBar />
-    <SelectPanel class="select-wrapper" />
+    <SelectPanel class="select-wrapper" :filters="filters"/>
     <CinemaList class="cinemas" />
   </div>
 </template>
 
 <script>
 import TopBar from './top'
+import NavBar from '@/components/navbar/fixed'
 import SelectPanel from '@/components/selectPanel'
 import CinemaList from '@/components/cinemaList'
+import { getFilterCinemas } from '@/api'
 
 export default {
   name: 'Cinema',
+  data () {
+    return {
+      filters: {}
+    }
+  },
   created () {
-    this.$store.commit('changePageTitle', '影院')
+    getFilterCinemas({ params: { ci: 10 } }).then(data => {
+      this.filters = data
+    })
   },
   components: {
+    NavBar,
     TopBar,
     SelectPanel,
     CinemaList

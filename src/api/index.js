@@ -28,7 +28,7 @@ export const getComingListAction = getDataByAction(getInitComingList, getmoreCom
 export const getMovieDetail = request('/detailmovie')
 
 // 过滤影院
-export const getFilterCinema = request('/filterCinemas')
+export const getFilterCinemas = request('/filterCinemas')
 // 电影播放的影院
 export const postMovie = request('/movie', 'post')
 

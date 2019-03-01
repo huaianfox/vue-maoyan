@@ -9,21 +9,17 @@
       href="javascript:void(0);"
       class="iconfont icon-back"
     ></a>
-    <h1 class="navbar-title ellipsis">{{pageTitle}}</h1>
+    <h1 class="navbar-title ellipsis">{{title}}</h1>
   </header>
 </template>
 
 <script>
-import { mapState } from 'vuex'
 export default {
   name: 'Navbar',
   data () {
     return {
       defaultTitle: '猫眼电影'
     }
-  },
-  computed: {
-    ...mapState(['pageTitle'])
   },
   props: {
     msg: String,

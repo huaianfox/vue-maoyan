@@ -35,12 +35,11 @@ import { mapState, mapMutations } from 'vuex'
 export default {
   data () {
     return {
-      cinemaList: []
     }
   },
   props: {
-    movieId: {
-      type: Number,
+    cinemaList: {
+      type: Array,
       default () {
         return []
       }
@@ -50,30 +49,30 @@ export default {
     ...mapState(['day'])
   },
   mounted () {
-    postMovie({
-      params: {
-        forceUpdate: Date.now()
-      },
-      data: {
-        movieId: 410629,
-        day: this.day,
-        offset: 0,
-        limit: 20,
-        districtId: -1,
-        lineId: -1,
-        hallType: -1,
-        brandId: -1,
-        serviceId: -1,
-        areaId: -1,
-        stationId: -1,
-        updateShowDay: true,
-        reqId: 1551257222493,
-        cityId: 10
-      }
-    }).then(data => {
-      this.cinemaList = data.cinemas
-      this.setDates(data.showDays.dates)
-    })
+    // postMovie({
+    //   params: {
+    //     forceUpdate: Date.now()
+    //   },
+    //   data: {
+    //     movieId: 410629,
+    //     day: this.day,
+    //     offset: 0,
+    //     limit: 20,
+    //     districtId: -1,
+    //     lineId: -1,
+    //     hallType: -1,
+    //     brandId: -1,
+    //     serviceId: -1,
+    //     areaId: -1,
+    //     stationId: -1,
+    //     updateShowDay: true,
+    //     reqId: 1551257222493,
+    //     cityId: 10
+    //   }
+    // }).then(data => {
+    //   this.cinemaList = data.cinemas
+    //   this.setDates(data.showDays.dates)
+    // })
   },
   methods: {
     ...mapMutations(['setDates'])

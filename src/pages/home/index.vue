@@ -1,11 +1,14 @@
 <template>
   <section class="panel">
+    <NavBar title="猫眼电影" />
     <TopBar class="top" />
     <router-view></router-view>
   </section>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import NavBar from '@/components/navbar/fixed'
 import TopBar from './top'
 
 export default {
@@ -14,7 +17,14 @@ export default {
     this.$store.commit('changePageTitle', '猫眼电影')
   },
   components: {
+    NavBar,
     TopBar
+  },
+  computed: {
+    ...mapState(['city'])
+  },
+  activated () {
+    document.cookie = `ci=${this.city.id}%2C${encodeURI(this.city.nm)}`
   }
 }
 </script>
