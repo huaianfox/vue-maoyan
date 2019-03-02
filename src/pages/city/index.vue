@@ -1,6 +1,7 @@
 <template>
   <div class="page">
     <NavBar
+      title="城市列表"
       :back="true"
       :fixed="true"
     />

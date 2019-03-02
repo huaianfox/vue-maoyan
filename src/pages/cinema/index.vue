@@ -31,7 +31,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['cinemas']),
+    ...mapState(['cinemas', 'city']),
     empty () {
       const { cinemas } = this
       return cinemas ? !cinemas.length : false
@@ -59,7 +59,7 @@ export default {
     }
   },
   created () {
-    getFilterCinemas({ params: { ci: 10 } }).then(data => {
+    getFilterCinemas({ params: { ci: this.city.id } }).then(data => {
       this.filters = data
     })
   },

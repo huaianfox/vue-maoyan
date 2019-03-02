@@ -1,5 +1,6 @@
 <template>
-  <div class="page">
+  <div class="page"
+       :class="{fixed50: changeSelect}">
     <Navbar :title="detail.nm" />
     <MovieDetail v-show="detail.nm"
                  :detail="detail" />
@@ -7,8 +8,11 @@
          ref="fixedConetnt"
          :class="{fixed: isFixed}">
       <Date :dates="dates" />
-      <SelectPanel :filters="filters" />
+      <SelectPanel :filters="filters"
+                   @change="changeSelection" />
     </div>
+    <NoData v-if="empty"
+            title="暂无符合条件的影院"></NoData>
     <CinemaList :cinemaList="cinemas" />
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
@@ -21,8 +25,9 @@ import Navbar from '@/components/navbar'
 import MovieDetail from '@/components/movieDetail'
 import Date from './components/date'
 import SelectPanel from '@/components/selectPanel'
+import NoData from '@/components/no-data'
 import CinemaList from '@/components/cinemaList'
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState, mapMutations } from 'vuex'
 
 export default {
   data () {
@@ -34,7 +39,9 @@ export default {
       offsetHeight: 0,
       isFixed: false,
       handleThottle: null,
-      cinemaList: []
+      cinemaList: [],
+      empty: false,
+      changeSelect: ''
     }
   },
   computed: {
@@ -42,14 +49,30 @@ export default {
   },
   methods: {
     ...mapActions(['postMovie']),
+    ...mapMutations(['changeFilter']),
     infiniteHandler ($state) {
-      // $state.complete()
-      // $state.loaded()
-      // this.getCinemaListHandle({})
+      this.postMovie({ movieId: this.movieId, updateShowDay: true, cityId: this.city.id }).then(data => {
+        const { paging } = data
+        this.empty = paging.total === 0
+        if (!this.dates.length) {
+          this.dates = data.showDays.dates
+        }
+        if (paging.hasMore) {
+          this.changeFilter({
+            offset: paging.offset + paging.limit
+          })
+          $state.loaded()
+        } else {
+          $state.complete()
+        }
+      })
     },
     handleScroll () {
       const top = document.documentElement.scrollTop
       this.isFixed = top > this.offsetHeight
+    },
+    changeSelection (name) {
+      this.changeSelect = name
     }
   },
   mounted () {
@@ -76,16 +99,17 @@ export default {
       this.filters = data
     })
 
-    this.postMovie({ movieId, updateShowDay: true, cityId: this.city.id }).then(data => {
-      this.dates = data.showDays.dates || []
-    })
+    // this.postMovie({ movieId, updateShowDay: true, cityId: this.city.id }).then(data => {
+    //   this.dates = data.showDays.dates || []
+    // })
   },
   components: {
     Navbar,
     MovieDetail,
     Date,
     SelectPanel,
-    CinemaList
+    CinemaList,
+    NoData
   }
 }
 </script>
@@ -95,6 +119,18 @@ export default {
   background: #fff;
   z-index: 999;
 }
+.fixed50 {
+  height: 100%;
+  overflow: hidden;
+
+  .choose {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    width: 100%;
+  }
+}
+
 .fixed {
   position: fixed;
   top: 0;

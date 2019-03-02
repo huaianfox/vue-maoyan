@@ -13,9 +13,9 @@
         <aside class="region-sidenav"
                v-if="sidenav">
           <div class="district-li"
-               v-for="(item) in sidenav.subItems"
+               v-for="(item, index) in sidenav.subItems"
                :key="item.name"
-               @click="changeSubTab(item, currentIndex)"
+               @click="changeSubTab(item, currentIndex, index)"
                :class="{active: item.id === currentCate.index}">
             {{item.name}}({{item.count}})
           </div>
@@ -86,10 +86,19 @@ export default {
       this.currentIndex = index
       this.currentSub = []
     },
-    changeSubTab (item, index) {
+    changeSubTab (item, index, i) {
       this.currentCate.index = item.id
       this.cate[index].index = item.id
       this.currentSub = item.subItems
+      if (i === 0) {
+        console.log(item)
+        console.log(this.cate[index])
+        const cate = this.cate[index]
+        let params = {}
+        params[cate.type] = -1
+        params[cate.subType] = -1
+        this.fresh(params)
+      }
     },
     choosen (item, index) {
       let params = {}
@@ -99,7 +108,10 @@ export default {
         params[item.type] = item.index
         params[item.subType] = item.subIndex
       })
-      this.changeFilter({ ...params })
+      this.fresh(params)
+    },
+    fresh (params) {
+      this.changeFilter({ ...params, offset: 0 })
       this.$emit('close')
       this.$store.dispatch('getCinemaList')
     }

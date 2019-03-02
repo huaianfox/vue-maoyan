@@ -83,9 +83,11 @@ export default {
   methods: {
     choose (tab) {
       this.selected = tab.name
+      this.$emit('change', 'fixed-50')
     },
     closeChoosed () {
       this.selected = ''
+      this.$emit('change', '')
     }
   }
 }

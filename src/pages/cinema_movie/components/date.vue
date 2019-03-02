@@ -2,10 +2,10 @@
   <div class="days">
     <ul class="content">
       <li class="day"
-          :class="day === item.date ? 'choosen': ''"
-          v-for="item in dates"
+          :class="currentIndex === index ? 'choosen': ''"
+          v-for="(item, index) in dates"
           :key="item.date"
-          @click="selectDay(item.date)">{{item.date}}</li>
+          @click="freshDate(item.date, index)">{{item.date}}</li>
     </ul>
   </div>
 </template>
@@ -14,7 +14,9 @@
 import { mapState, mapMutations } from 'vuex'
 export default {
   data () {
-    return {}
+    return {
+      currentIndex: 0
+    }
   },
   props: {
     dates: Array
@@ -23,10 +25,15 @@ export default {
     ...mapState(['day'])
   },
   methods: {
-    ...mapMutations(['changeDay']),
+    ...mapMutations(['changeDay', 'changeFilter']),
     selectDay (day) {
       this.changeDay(day)
       this.$emit('getCinemaListHandle', { day })
+    },
+    freshDate (day, index) {
+      this.currentIndex = index
+      this.changeFilter({ offset: 0, day: day, districtId: -1 })
+      this.$store.dispatch('getCinemaList')
     }
   }
 }
