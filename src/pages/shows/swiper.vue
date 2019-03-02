@@ -1,28 +1,45 @@
 <template>
-  <section class="cinema-nav">
-    <div class="post-bg"
-         :style="{background: backgroundImg}"></div>
-    <swiper :options="swiperOption">
-      <swiper-slide v-for="item in list"
-                    :key="item.img">
-        <div class="poster">
-          <img :src="item.img"
-               alt>
-        </div>
-      </swiper-slide>
-      <!-- <div class="swiper-pagination" slot="pagination"/> -->
-    </swiper>
+  <section class="swipe-wrapper">
+    <section class="cinema-nav">
+      <div class="post-bg"
+           :style="{background: backgroundImg}"></div>
+      <swiper ref="cinemaSwiper"
+              :options="swiperOption">
+        <swiper-slide v-for="(item, index) in list"
+                      :key="item.img">
+          <div class="poster"
+               :class="{active: currentIndex === index}"
+               >
+            <img :src="item.img| formatImg"
+                 alt>
+          </div>
+        </swiper-slide>
+      </swiper>
+    </section>
+    <div class="movie-info">
+      <header class="movie-title">
+        <span class="title">{{info.nm}}</span>
+        <span class="grade">
+          <em>{{tips.num}}</em>
+          {{tips.name}}
+        </span>
+      </header>
+      <p class="movie-desc">{{info.desc}}</p>
+    </div>
+    <Seat :info="info" >
+      <Discount slot="vip-tips" v-if="vip.tag" :info="vip"/>
+    </Seat>
   </section>
 </template>
 
 <script >
-// import Slider from "@/components/slider";
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
-
+import Seat from './seat'
+import Discount from './discount'
+import { getImg } from '@/util'
 export default {
   data () {
     return {
-      backgroundImg: 'url(//p0.meituan.net/148.208/movie/caa49433185fd62b4384e3ad195ec1541309089.jpg)',
       currentIndex: 0,
       swiperOption: {
         delay: 2500,
@@ -30,51 +47,62 @@ export default {
           el: '.swiper-pagination',
           clickable: true
         },
-        notNextTick: false,
+        slideToClickedSlide: true,
         slidesPerView: 4,
         centeredSlides: true,
-        paginationClickable: true,
-        spaceBetween: 3,
-        on: {
-          slideChangeTransitionStart () {
-            this.currentIndex = this.realIndex
-          }
+        spaceBetween: 5
+      }
+    }
+  },
+  computed: {
+    swiper () {
+      return this.$refs.cinemaSwiper
+    },
+    backgroundImg () {
+      const list = this.list[this.currentIndex] ? this.list[this.currentIndex] : {}
+      const img = list.img ? list.img.replace('w.h', '140.208') : ''
+      return `url(${img})`
+    },
+    info () {
+      return this.list[this.currentIndex] || {}
+    },
+    tips () {
+      const info = this.info
+      if (info.sc === '0.0') {
+        return {
+          num: info.wish,
+          name: '人想看'
         }
-      },
-      list: [
-        {
-          desc: '128分钟 | 剧情 | 吴京,屈楚萧,李光洁',
-          dur: 128,
-          globalReleased: true,
-          id: 248906,
-          img: '//p1.meituan.net/148.208/movie/616cd50a33550a9225ac781e52d14ae54967551.jpg',
-          nm: '流浪地球',
-          preferential: 0,
-          sc: '9.3',
-          showCount: 37
-        },
-        {
-          desc: '128分钟 | 剧情 | 吴京,屈楚萧,李光洁',
-          dur: 128,
-          globalReleased: true,
-          id: 24890236,
-          img: '//p0.meituan.net/148.208/movie/caa49433185fd62b4384e3ad195ec1541309089.jpg',
-          nm: '流浪地球',
-          preferential: 0,
-          sc: '9.3',
-          showCount: 37
-        }
-      ]
+      }
+      return {
+        num: info.sc,
+        name: '分'
+      }
+    }
+  },
+  props: {
+    list: Array,
+    vip: Object
+  },
+  filters: {
+    formatImg (value) {
+      if (!value) return ''
+      return getImg('92.92')(value)
     }
   },
   components: {
     swiper,
-    swiperSlide
+    swiperSlide,
+    Seat,
+    Discount
   },
-  watch: {
-    currentIndex () {
-      this.backgroundImg = `url(${this.list[this.currentIndex].img})`
-    }
+  created () {
+    this.$nextTick(() => {
+      const vm = this
+      this.swiper.$on('slideChangeTransitionStart', function () {
+        vm.currentIndex = this.swiper.realIndex
+      })
+    })
   }
 }
 </script>
@@ -82,9 +110,9 @@ export default {
 <style scoped lang="scss">
 @import '~swiper/dist/css/swiper.css';
 .cinema-nav {
-  padding: 20px 15px 20px 5px;
-  overflow: hidden;
+  padding: 30px 15px 30px 5px;
   transform: translateZ(0);
+  overflow: hidden;
   .post-bg {
     position: absolute;
     width: 100%;
@@ -92,7 +120,6 @@ export default {
     top: 0;
     left: 0;
     z-index: -1;
-    overflow: hidden;
     -webkit-filter: blur(30px);
     filter: blur(30px);
     background-position-y: 40%;
@@ -103,26 +130,73 @@ export default {
     width: 65px;
     transition: transform 0.3s;
     position: relative;
-    // overflow: hidden;
     img {
       width: 100%;
-      height: 95px;
+      height: 96px;
       transform: scale(1);
+      vertical-align: middle;
     }
   }
-  .swiper-slide-active {
-    .poster {
-      transform: scale(1.1);
-      border: 2px solid #fff;
-      &:after {
-        content: '';
-        position: absolute;
-        bottom: -6px;
-        left: 50%;
-        border: 3px solid transparent;
-        border-top: #fff;
-      }
+  .swiper-container {
+    overflow: visible;
+  }
+  .swiper-slide {
+    width: 65px;
+    height: 94px;
+  }
+  .active {
+    position: relative;
+    width: 65px;
+    height: 94px;
+    border: 2px solid #fff;
+    transform: scale(1.1);
+    &:after {
+      width: 0;
+      height: 0;
+      content: '';
+      position: absolute;
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+      transform: translateX(-50%);
+      bottom: -11px;
+      z-index: 100;
+      border: 5px solid transparent;
+      border-top: 5px solid #fff;
     }
+  }
+}
+.movie-info {
+  padding: 11px 15px;
+  background: #fff;
+  text-align: center;
+  .movie-title {
+    height: 24px;
+    line-height: 24px;
+    font-size: 17px;
+    color: #333;
+    font-weight: 700;
+  }
+  .title {
+    line-height: 24px;
+    font-size: 17px;
+    color: #333;
+    font-weight: 700;
+  }
+  .grade {
+    padding-left: 5px;
+    color: #ffb400;
+    font-size: 14px;
+    em {
+      font-style: normal;
+      font-size: 16px;
+    }
+  }
+  .movie-desc {
+    margin-top: 2px;
+    height: 18.5px;
+    line-height: 18.5px;
+    font-size: 13px;
+    color: #999;
   }
 }
 </style>

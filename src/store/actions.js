@@ -8,11 +8,11 @@ export default {
     ctx.commit('changeCity', city)
   },
   getCinemaList (ctx) {
-    const filters = ctx.state.filters
+    const { filters, city } = ctx.state
     if (filters.offset === 0) {
       ctx.commit('initCinemaList', {})
     }
-    return getCinemaList({ params: filters }).then(data => {
+    return getCinemaList({ params: { ...filters, cityId: city.id } }).then(data => {
       ctx.commit('initCinemaList', data)
       return data
     })

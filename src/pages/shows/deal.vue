@@ -43,7 +43,6 @@ export default {
     },
     formatTag (value) {
       if (!value) return ''
-      console.log(value)
       return this.tags[value]
     }
   },

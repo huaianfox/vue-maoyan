@@ -1,9 +1,14 @@
 <template>
   <div class="pages">
     <NavBar :title="cinemaData.nm" />
-    <Info :info="cinemaData" />
-    <Swiper />
-    <Deal :list="list" />
+    <Info :info="cinemaData" v-if="cinemaData"/>
+    <Swiper :list="movieList"
+            v-if="movieList.length"
+            :vip="vipInfo" />
+    <Deal :list="list"
+          v-if="list.length" />
+    <infinite-loading v-if="!isLoad"
+                      @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
@@ -16,7 +21,8 @@ import Swiper from './swiper'
 export default {
   data () {
     return {
-      detail: {}
+      detail: {},
+      isLoad: false
     }
   },
   computed: {
@@ -27,14 +33,26 @@ export default {
       const dealList = this.detail.dealList
       const ret = (dealList && dealList.dealList) || []
       return ret
+    },
+    movieList () {
+      const showData = this.detail.showData
+      return showData ? showData.movies : []
+    },
+    vipInfo () {
+      const showData = this.detail.showData
+      const vips = showData ? showData.vipInfo : []
+      return vips ? vips[0] : {}
     }
   },
-  created () {
-    const { id } = this.$route.params
-    console.log(this.$route.params)
-    getCinemaDetail({ params: { cinemaId: id } }).then(data => {
-      this.detail = data
-    })
+  methods: {
+    infiniteHandler ($state) {
+      const { id } = this.$route.params
+      getCinemaDetail({ params: { cinemaId: id } }).then(data => {
+        this.detail = data
+        this.isLoad = true
+        $state.complete()
+      })
+    }
   },
   components: {
     NavBar,
@@ -47,6 +65,7 @@ export default {
 
 <style scoped lang="scss">
 .pages {
+  min-height: 100%;
   background: #f0f0f0;
 }
 </style>
