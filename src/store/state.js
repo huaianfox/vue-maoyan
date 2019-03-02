@@ -3,6 +3,8 @@ import { getDay } from '@/util/date'
 import filters from '@/config/filters'
 const city = storage.get('city') || { nm: '淮安', id: 180 }
 const cityHistory = storage.get('cityHistory') || {}
+
+document.cookie = `ci=${city.id}%2C${encodeURI(city.nm)}`
 const day = getDay()
 
 export default {

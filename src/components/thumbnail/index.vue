@@ -1,7 +1,8 @@
 <template>
   <div class="thumb">
     <div class="avatar">
-      <img class="img" v-lazy="movie.img"
+      <img class="img"
+           v-lazy="movie.img"
            alt="">
     </div>
     <div class="info">

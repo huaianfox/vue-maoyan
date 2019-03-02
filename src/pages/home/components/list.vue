@@ -17,14 +17,6 @@ export default {
   },
   components: {
     Thumbnail
-  },
-  computed: {
-    url () {
-      return `${this.path}`
-    }
   }
 }
 </script>
-
-<style scoped lang="css">
-</style>

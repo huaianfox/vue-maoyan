@@ -47,7 +47,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../scss/fn.scss';
+@import '../../../scss/fn.scss';
 .hot-item {
   display: inline-block;
   position: relative;

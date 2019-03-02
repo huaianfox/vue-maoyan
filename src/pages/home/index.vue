@@ -7,24 +7,14 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 import NavBar from '@/components/navbar/fixed'
-import TopBar from './top'
+import TopBar from './components/top'
 
 export default {
   name: 'Home',
-  created () {
-    this.$store.commit('changePageTitle', '猫眼电影')
-  },
   components: {
     NavBar,
     TopBar
-  },
-  computed: {
-    ...mapState(['city'])
-  },
-  activated () {
-    document.cookie = `ci=${this.city.id}%2C${encodeURI(this.city.nm)}`
   }
 }
 </script>

@@ -81,12 +81,6 @@ const shows = {
   meta: { navbarFixed: false }
 }
 
-// const home = {
-//   path: '/',
-//   name: 'home',
-//   component: Home
-// }
-
 export default [
   layout,
   login,

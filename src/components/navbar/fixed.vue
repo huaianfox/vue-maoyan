@@ -7,6 +7,7 @@
 <script >
 import Navbar from './index'
 export default {
+  name: 'NavbarFixed',
   data () {
     return {
       back: false,

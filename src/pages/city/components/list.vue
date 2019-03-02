@@ -84,9 +84,7 @@ export default {
     handleCityClick (city) {
       this.changeCity(city)
       this.addCityHistory(city)
-      console.log(city)
       this.$router.replace('/')
-      location.reload()
     },
     ...mapMutations(['changeCity', 'addCityHistory'])
   },
