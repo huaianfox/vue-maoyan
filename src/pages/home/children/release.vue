@@ -14,7 +14,7 @@
                        :to="'movie/' + item.id"
                        :key="key">
             <div class="poster">
-              <img :src="item.img"
+              <img class="img" :src="item.img"
                    onerror="this.style.visibility='hidden'" />
               <span class="wish">{{item.wish}} 人想看</span>
             </div>

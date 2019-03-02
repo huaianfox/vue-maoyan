@@ -32,6 +32,7 @@ export default {
   padding: 0 15px;
   border-top: 1px solid #e5e5e5;
   border-bottom: 1px solid #e5e5e5;
+  background: #fff;
   margin: 8px 0;
   .buy-link {
     display: block;
@@ -57,9 +58,12 @@ export default {
     line-height: 20px;
   }
   .text-expander-button {
+    margin: 0 auto;
     padding: 10px 0;
     font-size: 16px;
-    line-height: 16px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
     vertical-align: middle;
     text-align: center;
     &.iconfont {

@@ -6,6 +6,7 @@
       <div class="poster">
         <img :src="poster"
              alt />
+        <slot name="video" />
       </div>
       <div class="content">
         <div class="title ellipsis">{{detail.nm}}</div>

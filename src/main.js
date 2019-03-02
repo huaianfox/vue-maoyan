@@ -13,7 +13,7 @@ Vue.config.productionTip = false
 
 fastClick.attach(document.body)
 Vue.use(VueLazyload, {
-  loading: '/assets/ajax-loader.gif'
+  loading: '/assets/loading.png'
 })
 
 Vue.use(infiniteScroll)
