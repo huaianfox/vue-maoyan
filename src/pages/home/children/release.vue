@@ -1,145 +1,23 @@
 <template>
   <section class="inner">
-    <div class="most-expected">
-      <p class="title">近期最受期待</p>
-      <div class="most-expected-wrapper"
-           v-show="expectList.length">
-        <ul class="most-expected-list"
-            v-infinite-scroll="loadMoreMostExpected"
-            infinite-scroll-disabled="expectLoding"
-            infinite-scroll-distance="20">
-          <router-link class="movie-item"
-                       tag="li"
-                       v-for="(item, key) in expectList"
-                       :to="'movie/' + item.id"
-                       :key="key">
-            <div class="poster">
-              <img class="img" :src="item.img"
-                   onerror="this.style.visibility='hidden'" />
-              <span class="wish">{{item.wish}} 人想看</span>
-            </div>
-            <h5 class="title">{{item.nm}}</h5>
-            <p class="date">{{item.comingTitle}}</p>
-          </router-link>
-        </ul>
-      </div>
-    </div>
-    <div class="comming-group">
-      <div class="movie-group"
-           v-for="item in comingList"
-           :key="item.comingTitle">
-        <p class="group-date">{{item.comingTitle}}</p>
-        <List :path='path'
-              :list='item.data' />
-      </div>
-      <infinite-loading @infinite="infiniteHandler">
-        <div slot="no-more">哦，没有更多电影了</div>
-      </infinite-loading>
-    </div>
+    <Expect />
+    <ComingGroup />
   </section>
 </template>
 
 <script>
-import List from '../components/list'
-import { getMostExpected, getComingListAction } from '@/api'
-import { setImgSize } from '@/util'
+import Expect from '../components/relaese-expect'
+import ComingGroup from '../components/release-coming'
 
 export default {
   name: 'Coming',
   data () {
-    return {
-      path: 'movie/',
-      expectLoding: false,
-      comingList: {},
-      expectList: [],
-      expectedConfig: {
-        ci: 80,
-        limit: 10,
-        offset: 0,
-        token: '',
-        total: 0,
-        hasMore: true
-      },
-      comingConfig: {
-        ci: 180,
-        token: '',
-        limit: 10,
-        offset: 0,
-        total: 0,
-        movieIds: []
-      }
-    }
+    return {}
   },
   components: {
-    List
-  },
-  created () {
-  },
-  methods: {
-    loadMoreMostExpected () {
-      const expectedConfig = this.expectedConfig
-      const { hasMore, total, ...params } = expectedConfig
-      if (!hasMore) {
-        this.expectLoding = false
-        return
-      }
-      // this.expectLoding = true
-      getMostExpected({ params }).then(data => {
-        const { coming, paging } = data
-        expectedConfig.total = paging.total
-        expectedConfig.hasMore = paging.hasMore
-        expectedConfig.offset += coming.length
-        const expectList = setImgSize(coming, '170.230')
-        this.expectList.push(...expectList)
-        this.expectLoding = false
-      })
-    },
-    infiniteHandler ($state) {
-      const comingConfig = this.comingConfig
-      const { offset, total, movieIds, limit, ...params } = comingConfig
-      const isFirst = offset === 0
-      const getList = getComingListAction(isFirst)
-      if (offset && offset >= total) return
-      const queryMovieIds = movieIds.slice(offset, limit + offset).join()
-
-      getList({
-        params: { movieIds: queryMovieIds, ...params, limit }
-      }).then(data => {
-        const { coming, movieIds } = data
-        if (movieIds) {
-          comingConfig.movieIds = movieIds.flat()
-          comingConfig.total = movieIds.length
-        }
-        return coming
-      }).then(list => {
-        if (list.length) {
-          comingConfig.offset += list.length
-          const cominglist = setImgSize(list)
-          this.divideList(cominglist)
-          $state.loaded()
-        } else {
-          $state.complete()
-        }
-      })
-    },
-    divideList (list) {
-      list.forEach(item => {
-        const rt = item.rt
-        if (!this.comingList[rt]) {
-          this.$set(this.comingList, rt, {
-            comingTitle: item.comingTitle,
-            data: []
-          })
-        }
-        const data = this.comingList[rt].data
-        this.$set(this.comingList[rt], 'data', [...data, item])
-      })
-    }
+    Expect,
+    ComingGroup
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang='scss' scoped>
-@import './release.scss';
-</style>

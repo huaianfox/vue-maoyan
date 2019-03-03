@@ -8,24 +8,62 @@
   <meta name="description" content="Description">
   <meta name="viewport"
     content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="icon" href="./_assets/favicon.ico">
   <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
+  <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
 </head>
 
 <body>
   <div id="app"></div>
   <script>
     window.$docsify = {
+      nameLink: '/',
       logo: '/_assets/favicon.ico',
       name: 'Vue猫眼电影',
       repo: 'https://github.com/huaianfox/vue-maoyan',
-      loadNavbar: true,
+      // loadNavbar: true,
       loadSidebar: true,
       maxLevel: 4,
       subMaxLevel: 4,
-      auto2top: true
+      auto2top: true,
+      search: 'auto',
+      search: {
+        maxAge: 86400000, // 过期时间，单位毫秒，默认一天
+        paths: [], // or 'auto'
+        placeholder: 'Type to search',
+        noData: 'No Results!',
+
+        // 支持本地化
+        noData: {
+          '/': '找不到结果'
+        },
+
+        // 搜索标题的最大程级, 1 - 6
+        depth: 2
+      }
     }
   </script>
   <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+  <script src="//unpkg.com/docsify-copy-code"></script>
+  <script src="//unpkg.com/docsify/lib/plugins/gitalk.min.js"></script>
+
+  <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
+  <script>
+    !function () {
+      if (typeof navigator.serviceWorker !== 'undefined') {
+        navigator.serviceWorker.register('sw.js')
+      }
+      const gitalk = new Gitalk({
+        clientID: '724ae864e5475a3dae0c',
+        clientSecret: '94e5ba5a1b04ff069fde4e3f0b08ad8d5a8e73fc',
+        repo: 'https://github.com/huaianfox/vue-maoyan',
+        owner: 'huaianfox',
+        admin: ['huaianfox'],
+        // facebook-like distraction free mode
+        distractionFreeMode: false
+      })
+    }()
+  </script>
 </body>
 
 </html>

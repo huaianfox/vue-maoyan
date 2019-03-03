@@ -2,6 +2,7 @@
 - [TAB页布局](layout)
 - [HOME页架构](home)
 - [HOME之Hot](hot)
+- [HOME之Release](release)
 - [影院页开发](cinema)
 - [电影-影院列表开发](cinema_movie)
 - [影院-电影列表开发](shows)

@@ -53,16 +53,6 @@ export default {
     showInfo () {
       return this.movie.showInfo || `${this.movie.rt} 上映`
     }
-  },
-  methods: {
-    jump (item) {
-      this.$router.push({
-        name: 'cinema_movie',
-        params: {
-          id: item.id
-        }
-      })
-    }
   }
 }
 </script>
