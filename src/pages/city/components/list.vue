@@ -39,7 +39,7 @@
 <script >
 import BScroll from 'better-scroll'
 import { mapState, mapMutations } from 'vuex'
-import Panel from './base'
+import Panel from './panel'
 
 export default {
   data () {
@@ -59,7 +59,6 @@ export default {
     }
   },
   props: {
-    geoCity: Object,
     letterMap: Object,
     letter: String
   },

@@ -1,10 +1,12 @@
 ## 首页架构预览
-home目录在src\pages\home\index.vue
 -  主页分两个子页面，正在热映（hot）和即将上映页面，HOME主页默认显示正在热映（hot）页面
   - [正在热映HOT页面](hot)
   - [即将上映页面](release)
 
 ```html
+/**
+*****@addr src\pages\home\index.vue
+**/
 <template>
   <section class="panel">
     <NavBar title="猫眼电影" />

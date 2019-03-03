@@ -62,7 +62,7 @@ export default {
         this.expectList.push(...expectList)
         this.expectLoding = false
       })
-    },
+    }
   }
 }
 </script>

@@ -1,19 +1,11 @@
 <template>
   <div class="page">
-    <NavBar
-      title="城市列表"
-      :back="true"
-      :fixed="true"
-    />
-    <List
-      :geoCity="geoCity"
-      :letterMap="letterMap"
-      :letter="letter"
-    />
-    <Alphabet
-      :letterMap="letterMap"
-      @changePanel="handleLetterChange"
-    />
+    <NavBar title="城市列表"
+            :fixed="true" />
+    <List :letterMap="letterMap"
+          :letter="letter" />
+    <Alphabet :letterMap="letterMap"
+              @changePanel="handleLetterChange" />
   </div>
 </template>
 
@@ -21,13 +13,18 @@
 import NavBar from '@/components/navbar'
 import List from './components/list'
 import Alphabet from './components/alphabet'
-import { getCityList } from '@/api'
+import { mapState, mapActions } from 'vuex'
+
 export default {
   data () {
     return {
-      letter: '',
-      geoCity: {},
-      letterMap: {}
+      letter: ''
+    }
+  },
+  computed: {
+    ...mapState(['cityList']),
+    letterMap () {
+      return this.cityList || {}
     }
   },
   components: {
@@ -36,13 +33,10 @@ export default {
     Alphabet
   },
   created () {
-    getCityList().then(resp => {
-      const { geoCity, letterMap } = resp.data
-      this.geoCity = geoCity
-      this.letterMap = letterMap
-    })
+    this.cityList || this.getCityList()
   },
   methods: {
+    ...mapActions(['getCityList']),
     handleLetterChange (letter) {
       this.letter = letter
     }

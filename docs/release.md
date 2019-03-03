@@ -268,7 +268,6 @@ export default {
 
 <script >
 import List from '../components/list'
-import Expect from '../components/relaese-expect'
 import { getComingListAction } from '@/api'
 import { setImgSize } from '@/util'
 export default {
@@ -285,7 +284,6 @@ export default {
         movieIds: []
       }
     }
-
   },
   methods: {
     infiniteHandler ($state) {

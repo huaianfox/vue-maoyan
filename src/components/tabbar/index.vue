@@ -4,7 +4,7 @@
                  v-for="(tab) in tabs"
                  :key="tab.icon"
                  :to="tab.path"
-                 :class="currentRoute ===  tab.path ? 'active' : ''"
+                 :class="{active : $route.path ===  tab.path || $route.path === tab.alias}"
                  exact>
       <div :class='"nav-icon iconfont icon-" +tab.icon'>
       </div>
@@ -19,14 +19,7 @@ export default {
   name: 'Tabbar',
   data () {
     return {
-      activeIndex: 0,
       tabs: [...tabs]
-    }
-  },
-  computed: {
-    currentRoute () {
-      const path = this.$route.path
-      return path === '/release' ? '/' : path
     }
   }
 }

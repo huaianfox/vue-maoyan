@@ -1,5 +1,5 @@
 - [前言](start)
-- [TAB页布局](layout)
+- [TAB页layout布局](layout)
 - [HOME页架构](home)
 - [HOME之Hot](hot)
 - [HOME之Release](release)
@@ -11,4 +11,3 @@
 - [selectPanel组件开发](select-panel)
 - [引入store](store)
 - [引入localstorage](localstorage)
-- [优化上线](build)

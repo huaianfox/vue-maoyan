@@ -1,4 +1,4 @@
-import { getCinemaList, postMovie } from '@/api'
+import { getCinemaList, postMovie, getCityList } from '@/api'
 
 export default {
   updatedMovieDetail (ctx, movie) {
@@ -34,6 +34,11 @@ export default {
     }).then(data => {
       ctx.commit('initCinemaList', data)
       return data
+    })
+  },
+  getCityList (ctx) {
+    getCityList().then(resp => {
+      ctx.commit('saveCityList', resp.data)
     })
   }
 }

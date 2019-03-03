@@ -1,7 +1,7 @@
 export default [
   {
     path: '/',
-    alias: 'release',
+    alias: '/release',
     title: '电影',
     icon: 'movie'
   },

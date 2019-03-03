@@ -91,8 +91,6 @@ export default {
       this.cate[index].index = item.id
       this.currentSub = item.subItems
       if (i === 0) {
-        console.log(item)
-        console.log(this.cate[index])
         const cate = this.cate[index]
         let params = {}
         params[cate.type] = -1
@@ -115,8 +113,6 @@ export default {
       this.$emit('close')
       this.$store.dispatch('getCinemaList')
     }
-  },
-  components: {
   }
 }
 </script>

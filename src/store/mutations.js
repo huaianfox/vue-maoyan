@@ -53,5 +53,9 @@ export default {
   },
   emptyCinemaList (state) {
     state.cinemas = []
+  },
+  saveCityList (state, data) {
+    state.cityList = data.letterMap
+    storage.set('cityList', data.letterMap)
   }
 }
