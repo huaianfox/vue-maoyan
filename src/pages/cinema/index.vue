@@ -5,8 +5,7 @@
     <SelectPanel class="select-wrapper"
                  :filters="filters" />
     <section class="list">
-      <NoData v-if="empty"
-              title="暂无符合条件的影院"></NoData>
+      <NoData v-if="empty" ></NoData>
       <CinemaList class="cinemas"
                   :cinemaList="cinemas" />
       <infinite-loading @infinite="infiniteHandler"></infinite-loading>
@@ -15,7 +14,7 @@
 </template>
 
 <script>
-import TopBar from './top'
+import TopBar from './components/top'
 import NavBar from '@/components/navbar/fixed'
 import SelectPanel from '@/components/selectPanel'
 import CinemaList from '@/components/cinemaList'

@@ -29,7 +29,7 @@ export default {
 ```
 ## Navbar组件
 这里引入了NavBar固定组件（src\components\navbar\fixed.vue），因为Tab页的顶部导航都是固定在顶部不随页面滚动，NavBar-fixed组件复用了通用NavBar（src\components\navbar\index.vue）组件
-
+### Navbar基础组件
 ```html
 // 通用Navbar组件 (src\components\navbar\index.vue)
 <template>
@@ -73,6 +73,7 @@ export default {
 </script>
 //...css略
 ```
+### Navbar固定组件
 ```html
 // Navbar固定组件 (src\components\navbar\fixed.vue)
 <template>

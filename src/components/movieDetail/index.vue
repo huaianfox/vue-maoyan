@@ -25,35 +25,6 @@
         <i class="iconfont icon-arrow-right"></i>
       </router-link>
     </div>
-    <!-- <div class="cover" :style="cover"></div>
-    <div class="detail">
-      <div class="poster">
-        <div class="movie-preview"
-             v-if="show"
-             :to="'/movie/'+ detail.id + '/preview'" /></div>
-            <img :src="poster" alt /></div>
-    <div class="content">
-      <div class="title ellipsis">{{detail.nm}}</div>
-      <div class="p1 ellipsis">{{detail.enm}}</div>
-      <div class="score ellipsis p1">
-        <span :class="{stars:show}">
-          <span v-if="show">
-            <img v-for="(star, key) in stars"
-                 :key="key"
-                 :src="star"
-                 alt="">
-          </span>
-          <span class="num">{{detail.sc}}</span>
-        </span>
-        <span class="p1">（{{num}}万人评）</span>
-      </div>
-      <div class="p1 ellipsis">{{detail.cat}}</div>
-      <div class="p1 ellipsis">{{detail.src}}</div>
-      <div class="p1 ellipsis">{{detail.pubDesc}}</div>
-    </div>
-    <router-link v-if="!show"
-                 :to="'/movie/'+ detail.id"
-                 class="iconfont icon-arrow-right" /> -->
   </div>
 </template>
 

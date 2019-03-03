@@ -10,10 +10,6 @@
 
 <script >
 export default {
-  data () {
-    return {
-    }
-  },
   props: {
     info: Object
   }

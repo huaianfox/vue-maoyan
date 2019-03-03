@@ -105,6 +105,7 @@ $selectedColor: #e54847;
   -webkit-box-shadow: 0 1px 2px 0 rgba(37, 47, 57, 0.1);
   box-shadow: 0 1px 2px 0 rgba(37, 47, 57, 0.1);
   z-index: 999;
+  border-bottom: 1px solid #f3f3f3;
   .select-tab {
     display: flex;
     text-align: center;

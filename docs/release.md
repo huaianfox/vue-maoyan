@@ -1,8 +1,7 @@
 ## 页面架构
-拆分两个组件Expect 和 ComingGroup，ComingGroup组件内是两个接口获取数据（初始化和加载更多），也做了接口合并处理（具体处理流程详见[HOME之Hot:接口合并](hot?id=合并接口)）
+拆分两个组件[Expect](release?id=Expect组件) 和 [ComingGroup](release?id=ComingGroup组件)，ComingGroup组件内是两个接口获取数据（初始化和加载更多），也做了接口合并处理（具体处理流程详见[HOME之Hot:接口合并](hot?id=合并接口)）
 ```html
 // @addr src\pages\home\children\release.vue
-```html
 <template>
   <section class="inner">
     <Expect />
@@ -32,6 +31,9 @@ export default {
 [即将上映电影接口](release?id=即将上映电影接口)和[加载更多即将上映电影接口](release?id=加载更多即将上映电影接口)做了接口合并处理（具体处理流程详见[HOME之Hot:接口合并](hot?id=合并接口)）
 
 #### 最受期待电影接口
+
+接口使用详见 [ xpect组件](release?id=Expect组件)
+
 | 信息        | 说明                             |
 | :---------- | :------------------------------- |
 | 功能        | 初始化获取电影信息               |
@@ -77,6 +79,9 @@ export default {
 ```
 
 #### 即将上映电影接口
+
+接口使用详见 [ComingGroup组件](release?id=ComingGroup组件)
+
 | 信息        | 说明                             |
 | :---------- | :------------------------------- |
 | 功能        | 初始化即将上映电影接口               |
@@ -123,6 +128,8 @@ export default {
 
 #### 加载更多即将上映电影接口
 
+接口使用详见[ComingGroup组件](release?id=ComingGroup组件)
+
 | 信息        | 说明                             |
 | :---------- | :------------------------------- |
 | 功能        | 初始化即将上映电影接口               |
@@ -161,4 +168,171 @@ export default {
     },
     ...
 }
+```
+
+## Expect组件
+```html
+/**
+* @addr src\pages\home\components\relaese-expect.vue
+*/
+<template>
+  <div class="most-expected">
+    <p class="title">近期最受期待</p>
+    <div class="most-expected-wrapper"
+         v-show="expectList.length">
+      <ul class="most-expected-list"
+          v-infinite-scroll="loadMoreMostExpected"
+          infinite-scroll-disabled="expectLoding"
+          infinite-scroll-distance="20">
+        <router-link class="movie-item"
+                     tag="li"
+                     v-for="(item, key) in expectList"
+                     :to="'movie/' + item.id"
+                     :key="key">
+          <div class="poster">
+            <img class="img"
+                 :src="item.img"
+                 onerror="this.style.visibility='hidden'" />
+            <span class="wish">{{item.wish}} 人想看</span>
+          </div>
+          <h5 class="title">{{item.nm}}</h5>
+          <p class="date">{{item.comingTitle}}</p>
+        </router-link>
+      </ul>
+    </div>
+  </div>
+</template>
+
+<script >
+import { getMostExpected } from '@/api'
+import { setImgSize } from '@/util'
+export default {
+  name: 'relaese-expect',
+  data () {
+    return {
+      expectLoding: false,
+      expectList: [],
+      expectedConfig: {
+        ci: 80,
+        limit: 10,
+        offset: 0,
+        token: '',
+        total: 0,
+        hasMore: true
+      }
+    }
+  },
+  methods: {
+    loadMoreMostExpected () {
+      const expectedConfig = this.expectedConfig
+      const { hasMore, total, ...params } = expectedConfig
+      if (!hasMore) {
+        this.expectLoding = false
+        return
+      }
+      getMostExpected({ params }).then(data => {
+        const { coming, paging } = data
+        expectedConfig.total = paging.total
+        expectedConfig.hasMore = paging.hasMore
+        expectedConfig.offset += coming.length
+        const expectList = setImgSize(coming, '170.230')
+        this.expectList.push(...expectList)
+        this.expectLoding = false
+      })
+    },
+  }
+}
+</script>
+```
+
+## ComingGroup组件
+接口合并流程详见[HOME之Hot:接口合并](hot?id=合并接口)
+```html
+/**
+* @addr src\pages\home\components\relaese-comming.vue
+*/
+<template>
+  <div class="comming-group">
+    <div class="movie-group"
+         v-for="item in comingList"
+         :key="item.comingTitle">
+      <p class="group-date">{{item.comingTitle}}</p>
+      <List :path='path'
+            :list='item.data' />
+    </div>
+    <infinite-loading @infinite="infiniteHandler">
+      <div slot="no-more">哦，没有更多电影了</div>
+    </infinite-loading>
+  </div>
+</template>
+
+<script >
+import List from '../components/list'
+import Expect from '../components/relaese-expect'
+import { getComingListAction } from '@/api'
+import { setImgSize } from '@/util'
+export default {
+  data () {
+    return {
+      path: 'movie/',
+      comingList: {},
+      comingConfig: {
+        ci: 180,
+        token: '',
+        limit: 10,
+        offset: 0,
+        total: 0,
+        movieIds: []
+      }
+    }
+
+  },
+  methods: {
+    infiniteHandler ($state) {
+      const comingConfig = this.comingConfig
+      const { offset, total, movieIds, limit, ...params } = comingConfig
+      const isFirst = offset === 0
+      const getList = getComingListAction(isFirst)
+      if (offset && offset >= total) return
+      const queryMovieIds = movieIds.slice(offset, limit + offset).join()
+
+      getList({
+        params: { movieIds: queryMovieIds, ...params, limit }
+      }).then(data => {
+        const { coming, movieIds } = data
+        if (movieIds) {
+          comingConfig.movieIds = movieIds.flat()
+          comingConfig.total = movieIds.length
+        }
+        return coming
+      }).then(list => {
+        if (list.length) {
+          comingConfig.offset += list.length
+          const cominglist = setImgSize(list)
+          this.divideList(cominglist)
+          $state.loaded()
+        } else {
+          $state.complete()
+        }
+      })
+    },
+    divideList (list) {
+      list.forEach(item => {
+        const rt = item.rt
+        if (!this.comingList[rt]) {
+          this.$set(this.comingList, rt, {
+            comingTitle: item.comingTitle,
+            data: []
+          })
+        }
+        const data = this.comingList[rt].data
+        this.$set(this.comingList[rt], 'data', [...data, item])
+      })
+    }
+  },
+  components: {
+    List
+  }
+}
+</script>
 ```

@@ -21,15 +21,8 @@ export default {
   props: {
     dates: Array
   },
-  computed: {
-    ...mapState(['day'])
-  },
   methods: {
-    ...mapMutations(['changeDay', 'changeFilter']),
-    selectDay (day) {
-      this.changeDay(day)
-      this.$emit('getCinemaListHandle', { day })
-    },
+    ...mapMutations(['changeFilter']),
     freshDate (day, index) {
       this.currentIndex = index
       this.changeFilter({ offset: 0, day: day, districtId: -1 })

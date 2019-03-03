@@ -1,7 +1,8 @@
 <template>
   <div class="pages">
     <NavBar :title="cinemaData.nm" />
-    <Info :info="cinemaData" v-if="cinemaData"/>
+    <Info :info="cinemaData"
+          v-if="cinemaData" />
     <Swiper :list="movieList"
             v-if="movieList.length"
             :vip="vipInfo" />
@@ -15,9 +16,9 @@
 <script >
 import NavBar from '@/components/navbar'
 import { getCinemaDetail } from '@/api'
-import Info from './info'
-import Deal from './deal'
-import Swiper from './swiper'
+import Info from './components/info'
+import Deal from './components/deal'
+import Swiper from './components/swiper'
 export default {
   data () {
     return {

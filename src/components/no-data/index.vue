@@ -1,7 +1,7 @@
 <template>
   <div class="no-data">
     <div class="content">
-      <img src="http://p0.meituan.net/movie/8b521599145a30fe521be9f2d60392d845310.png"
+      <img src="../../assets/img/nothing.png"
            alt="">
       <p class='no-cinema-tip'>{{title}}</p>
     </div>
@@ -11,7 +11,10 @@
 <script >
 export default {
   props: {
-    title: String
+    title: {
+      type: String,
+      default: '暂无符合条件的影院'
+    }
   }
 }
 </script>
@@ -29,6 +32,10 @@ export default {
       display: block;
       width: 40%;
       margin: auto;
+    }
+    .no-cinema-tip {
+      margin-top: 20px;
+      text-align: center;
     }
   }
 }

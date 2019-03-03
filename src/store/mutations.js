@@ -50,5 +50,8 @@ export default {
     } else {
       state.cinemas = [...state.cinemas, ...data.cinemas]
     }
+  },
+  emptyCinemaList (state) {
+    state.cinemas = []
   }
 }

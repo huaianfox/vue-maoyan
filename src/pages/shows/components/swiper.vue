@@ -8,8 +8,7 @@
         <swiper-slide v-for="(item, index) in list"
                       :key="item.img">
           <div class="poster"
-               :class="{active: currentIndex === index}"
-               >
+               :class="{active: currentIndex === index}">
             <img :src="item.img| formatImg"
                  alt>
           </div>
@@ -26,8 +25,10 @@
       </header>
       <p class="movie-desc">{{info.desc}}</p>
     </div>
-    <Seat :info="info" >
-      <Discount slot="vip-tips" v-if="vip.tag" :info="vip"/>
+    <Seat :info="info">
+      <Discount slot="vip-tips"
+                v-if="vip.tag"
+                :info="vip" />
     </Seat>
   </section>
 </template>

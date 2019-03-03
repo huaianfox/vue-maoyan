@@ -11,8 +11,7 @@
       <SelectPanel :filters="filters"
                    @change="changeSelection" />
     </div>
-    <NoData v-if="empty"
-            title="暂无符合条件的影院"></NoData>
+    <NoData v-if="empty"></NoData>
     <CinemaList :cinemaList="cinemas" />
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
@@ -40,20 +39,24 @@ export default {
       isFixed: false,
       handleThottle: null,
       cinemaList: [],
-      empty: false,
-      changeSelect: ''
+      changeSelect: '',
+      loaded: false
     }
   },
   computed: {
-    ...mapState(['cinemas', 'city'])
+    ...mapState(['cinemas', 'city']),
+    empty () {
+      const list = this.cinemas || []
+      return !list.length && this.loaded
+    }
   },
   methods: {
     ...mapActions(['postMovie']),
-    ...mapMutations(['changeFilter']),
+    ...mapMutations(['changeFilter', 'emptyCinemaList']),
     infiniteHandler ($state) {
       this.postMovie({ movieId: this.movieId, updateShowDay: true, cityId: this.city.id }).then(data => {
         const { paging } = data
-        this.empty = paging.total === 0
+        this.loaded = true
         if (!this.dates.length) {
           this.dates = data.showDays.dates
         }
@@ -82,6 +85,7 @@ export default {
     window.removeEventListener('scroll', this.handleScroll)
   },
   created () {
+    this.emptyCinemaList()
     const movieId = +this.$route.params.id
     this.movieId = movieId
     getMovieDetail({ params: { movieId } }).then(data => {
@@ -98,10 +102,6 @@ export default {
     }).then(data => {
       this.filters = data
     })
-
-    // this.postMovie({ movieId, updateShowDay: true, cityId: this.city.id }).then(data => {
-    //   this.dates = data.showDays.dates || []
-    // })
   },
   components: {
     Navbar,
