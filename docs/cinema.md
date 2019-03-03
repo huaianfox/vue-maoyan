@@ -10,7 +10,7 @@ Cinema 目录在@addr src\pages\cinema\index.vue
 
 > 页面初始加载获取当前城市选择影院的筛选的条件（影院区域划分、品牌、会员卡、影厅等），之后传给SelectPanel组件，点击SelectPanel组件选择筛选条件重新请求对应的接口数据
 
-> cinema页面渲染数据存放在vuex的state.cinemas，只有在打开相关页面时才赋值，默认为空
+> cinema页面渲染数据存放在vuex的state.cinemas，只有在打开相关页面时才赋值，默认为空，详见[影院页的vuex操作](vuex?id=影院列表的vuex使用)
 
 
 ```html

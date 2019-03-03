@@ -8,9 +8,6 @@ export default {
     storage.set('city', city)
     document.cookie = `ci=${city.id}%2C${encodeURI(city.nm)}`
   },
-  changePageTitle (state, title) {
-    state.pageTitle = title
-  },
   updateDetailMovie (state, movie) {
     const { id } = movie
     state.detailMovie = {
@@ -22,12 +19,6 @@ export default {
   addCityHistory (state, city) {
     state.cityHistory[city.id] = city
     storage.set('cityHistory', state.cityHistory)
-  },
-  getMovieById (state, id) {
-    return state.detailMovie[id]
-  },
-  setDates (state, dates) {
-    state.dates = dates
   },
   changeDay (state, day) {
     state.day = day
@@ -43,7 +34,6 @@ export default {
   },
   initCinemaList (state, data) {
     const { filters } = state
-    // state.cinemas = data.cinemas
     if (filters.offset === 0) {
       state.cinemaListData = data
       state.cinemas = data.cinemas

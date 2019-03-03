@@ -11,7 +11,6 @@ export default {
   cityList,
   cityHistory,
   detailMovie: {},
-  dates: [],
   filters,
   cinemaListData: {},
   cinemas: []

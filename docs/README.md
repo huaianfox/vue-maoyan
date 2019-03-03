@@ -20,10 +20,8 @@ Vue2.5 + Vuex + Vue Router + axios + Es6 + scss + flex + Webpack + ESlint + git
 - iconfont使用
 - 移动端点击穿透
 - 图片懒加载
-- 移动端1px边框问题
-- 移动端2x,3x背景图问题
-- 基础组件库如topbar、loading、弹出框、滚动条、城市选择等组件的封装
-- Vue动画
+- 基础组件库如topbar、loading、弹出框、城市选择组件的封装
+- 接口合并
 - Promise
 - axios获取数据
 - Vuex的使用

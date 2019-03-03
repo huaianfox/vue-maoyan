@@ -9,5 +9,4 @@
 - [个人中心开发](profile)
 - [城市列表组件开发](city)
 - [selectPanel组件开发](select-panel)
-- [引入store](store)
-- [引入localstorage](localstorage)
+- [引入vuex](vuex)
