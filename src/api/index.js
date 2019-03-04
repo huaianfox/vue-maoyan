@@ -6,7 +6,7 @@ import { getDataByAction } from '@/util'
  *  获取城市列表
  */
 
-export const getCityList = () => axios.get('/assets/json/cities.json')
+export const getCityList = () => axios.get(`${process.env.VUE_APP_LOCAL}/assets/json/cities.json`)
 
 /**
  *  首页
