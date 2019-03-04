@@ -16,7 +16,13 @@
         <p class="cinema-address-info ellipsis">{{cinema.addr}}</p>
         <span class="distance">{{cinema.distance}}</span>
       </div>
-      <div class="cinema-label ellipsis"></div>
+      <div class="cinema-label ellipsis feature-tags">
+        <span v-if="cinema.tag.allowRefund">退</span>
+        <span v-if="cinema.tag.endorse">改签</span>
+        <span class="featrue" v-if="cinema.tag.snack">小吃</span>
+        <span class="featrue"
+              v-if="cinema.tag.vipTag">折扣卡</span>
+      </div>
       <div class="cinema-discount ellipsis"
            v-if="cinema.promotion.cardPromotionTag">
         <span class="cinema-discount-label">
@@ -92,6 +98,25 @@ export default {
     img {
       width: 100%;
     }
+  }
+}
+.feature-tags {
+  margin-top: 7px;
+  span {
+    border: 1px solid #589daf;
+    color: #589daf;
+    position: relative;
+    display: inline-block;
+    padding: 0 3px;
+    height: 15px;
+    line-height: 15px;
+    border-radius: 2px;
+    font-size: 12px;
+    margin: 0 2px;
+  }
+  .featrue {
+    color: #f90;
+    border-color: #f90;
   }
 }
 </style>

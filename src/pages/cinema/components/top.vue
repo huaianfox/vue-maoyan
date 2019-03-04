@@ -1,6 +1,6 @@
 <template>
   <BaseTopBar :styles="bg">
-    <router-link :to="{name: 'search', params: {searchType: 'cinema'}}"
+    <router-link :to="{name: 'search', params: {searchtype: 'cinema', type: 2}}"
                  solt="search"
                  class="movie-search iconfont icon-search">
       搜索影院

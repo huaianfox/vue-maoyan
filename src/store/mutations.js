@@ -47,5 +47,14 @@ export default {
   saveCityList (state, data) {
     state.cityList = data.letterMap
     storage.set('cityList', data.letterMap)
+  },
+  updateSearchHistory (state, history) {
+    const list = {}
+    list[history.type] = history
+    state.searchHistory = {
+      ...state.searchHistory,
+      ...list
+    }
+    storage.set('searchHistory', state.searchHistory)
   }
 }

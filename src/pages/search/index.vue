@@ -1,18 +1,34 @@
 <template>
   <div class="page">
-    <Navbar />
+    <Navbar title="猫眼电影" />
     <div class="search-header">
       <div class="input-wrapper">
+        <span class="iconfont icon-search"></span>
         <input v-model="searchText"
                @input="handleSearchInput"
                type="text"
                class="search-input"
-               placeholder="搜影院">
+               :placeholder="panel.name">
+        <span v-if="searchText"
+              @click="emptyText"
+              class="iconfont icon-cancel"></span>
       </div>
-      <div class="cancel">取消</div>
+      <div @click="handleCancelCilck"
+           class="cancel">取消</div>
     </div>
-    <ResultHistory />
-    <Result :result="result" />
+    <ResultHistory v-if="!searchText"
+                   @trigerSearch="trigerSearch"
+                   :history="history" />
+    <ResultMovie v-if="resultMovie.total"
+                 :result="resultMovie"
+                 :max="max" />
+    <ResultCinema v-if="resultCinema.total"
+                  :result="resultCinema"
+                  :max="max" />
+    <infinite-loading v-if="searching">
+      <div class="loading"
+           slot="spinner">Loading...</div>
+    </infinite-loading>
   </div>
 </template>
 
@@ -20,86 +36,163 @@
 import Navbar from '@/components/navbar'
 import { getSearch } from '@/api'
 import ResultHistory from './components/history'
-import Result from './components/result'
-import { mapState } from 'vuex'
+import ResultMovie from './components/result-movie'
+import ResultCinema from './components/result-cinema'
+import { mapState, mapMutations } from 'vuex'
+import { uniqueArray } from '@/util'
 
 export default {
   name: 'Search',
   data () {
     return {
+      timer: null,
       searchText: '',
-      searchType: {
-        movie: 1,
-        cinema: 2
+      searchtype: {
+        movie: {
+          type: -1,
+          name: '搜电影、搜影院',
+          title: 'movies'
+        },
+        cinema: {
+          type: 2,
+          name: '搜影院',
+          title: 'cinemas'
+        }
       },
-      result: {
-        data: [],
-        type: 1
+      resultMovie: {},
+      resultCinema: {},
+      max: 3,
+      searching: false
+    }
+  },
+  watch: {
+    searchText (value) {
+      if (!value) {
+        this.resultMovie = {}
+        this.resultCinema = {}
       }
     }
   },
   computed: {
-    ...mapState(['city']),
+    ...mapState(['city', 'searchHistory']),
     cityId () {
-      return this.city.ci
+      return this.city.id
     },
-    style () {
-      return this.$route.params.searchType
+    panel () {
+      const { searchtype, $route: { params } } = this
+      const panel = params.searchtype || searchtype.movie
+      return searchtype[panel]
     },
-    styleId () {
-      return this.searchType[this.type]
+    history () {
+      const { title } = this.panel
+      return this.searchHistory[title]
     }
   },
-  created () {
-  },
   methods: {
-    handleSearchInput (e) {
-      getSearch({
-        params: {
-          kw: this.searchText,
-          cityId: 42,
-          style: 1
+    ...mapMutations(['updateSearchHistory']),
+    handleSearchInput () {
+      if (this.timer) return
+      this.timer = setTimeout(() => {
+        this.resultMovie = {}
+        this.resultCinema = {}
+        if (this.searchText) {
+          this.history.data.unshift(this.searchText)
+          this.history.data = uniqueArray(this.history.data)
+          this.updateSearchHistory({
+            ...this.history
+          })
         }
-      }).then(data => {
-        console.log(data)
-      })
+        this.timer = null
+        this.searching = true
+        getSearch({
+          params: {
+            kw: this.searchText,
+            cityId: this.cityId,
+            style: this.panel.type
+          }
+        }).then(data => {
+          const { cinemas, movies } = data
+          this.panel.type === -1 && this.formatData(movies, 'resultMovie')
+          this.formatData(cinemas, 'resultCinema')
+          this.searching = false
+        })
+      }, 300)
+    },
+    handleCancelCilck () {
+      this.$router.back()
+    },
+    emptyText () {
+      this.searchText = ''
+    },
+    trigerSearch (val) {
+      this.searchText = val
+      this.handleSearchInput()
+    },
+    formatData (data, title) {
+      if (!data) return
+      console.log(data)
+      const { list, total } = data
+      this[title] = {
+        list: total > this.max ? list.slice(0, this.max) : list,
+        total
+      }
     }
   },
   components: {
     Navbar,
     ResultHistory,
-    Result
+    ResultMovie,
+    ResultCinema
   }
 }
 </script>
 
 <style scoped lang="scss">
+.page {
+  min-height: 100%;
+  background-color: #f5f5f5;
+  .loading {
+    padding: 10px 0;
+  }
+}
 .search-header {
+  position: relative;
   display: -webkit-box;
   display: flex;
   -webkit-box-align: center;
   align-items: center;
   padding: 8px 0 8px 10px;
-  background-color: #f5f5f5;
   border-bottom: 1px solid #e5e5e5;
   z-index: 1;
   .input-wrapper {
-    padding: 0 10px;
+    position: relative;
+    flex: 1;
+    padding: 0 30px;
     border: 1px solid #e6e6e6;
     border-radius: 5px;
     background-color: #fff;
-    -webkit-box-flex: 1;
-    flex-grow: 1;
     .search-input {
-      -webkit-box-flex: 1;
-      flex: 1;
-      border: none;
+      padding: 5px 0;
       width: 100%;
       font-size: 13px;
       color: #333;
       line-height: 20px;
-      padding: 4px 0;
-      width: calc(100% - 40px);
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  .iconfont {
+    position: absolute;
+    padding: 0 6px;
+    line-height: 32px;
+    &.icon-search {
+      left: 0;
+      color: #b3b0b0;
+    }
+    &.icon-cancel {
+      right: 0;
+      right: 0;
     }
   }
   .cancel {

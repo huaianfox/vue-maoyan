@@ -9,7 +9,7 @@
       <div class="movie-title">
         <span class='name'>{{movie.nm}}</span>
         <span class='version'
-              :class="version[movie.version]"></span>
+              :class="movie.version"></span>
       </div>
       <div v-if="movie.globalReleased"
            class="movie-vote ellipsis">观众评{{movie.sc}}</div>
@@ -33,7 +33,6 @@ export default {
   name: 'Thumbnail',
   data () {
     return {
-      version: ['v3d-imax', '3d', 'v2d-imax'],
       status: {
         1: { tag: 'wantsee', act: '想看' },
         3: { tag: '', act: '购票' },

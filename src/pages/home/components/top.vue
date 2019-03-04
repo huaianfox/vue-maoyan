@@ -10,7 +10,7 @@
       >{{item.title}}</div>
     </div>
     <router-link
-      :to="{name: 'search', params: {searchType: 'movie'}}"
+      :to="{name: 'search', params: {searchtype: 'movie'}}"
       solt="search"
       class="movie-search iconfont icon-search"
     ></router-link>

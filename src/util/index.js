@@ -34,3 +34,5 @@ export const throttle = (func, timeout = 16) => {
     }
   }
 }
+
+export const uniqueArray = (array) => [...new Set(array)]
