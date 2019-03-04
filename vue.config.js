@@ -29,6 +29,6 @@ module.exports = {
   publicPath: '/',
   outputDir: 'dist',
   devServer: {
-    proxy: 'http://m.maoyan.com/ajax/'
+    proxy: 'http://maoyan.wentmall.com/ajax/'
   }
 }
