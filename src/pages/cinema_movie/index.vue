@@ -12,7 +12,12 @@
                    @change="changeSelection" />
     </div>
     <NoData v-if="empty"></NoData>
-    <CinemaList :cinemaList="cinemas" />
+    <div class="list">
+      <cinema-item :cinema="item"
+                   v-for="item in cinemas"
+                   :key="item.id">
+      </cinema-item>
+    </div>
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
@@ -25,7 +30,7 @@ import MovieDetail from '@/components/movieDetail'
 import Date from './components/date'
 import SelectPanel from '@/components/selectPanel'
 import NoData from '@/components/no-data'
-import CinemaList from '@/components/cinemaList'
+import CinemaItem from '@/components/cinema-item'
 import { mapActions, mapState, mapMutations } from 'vuex'
 
 export default {
@@ -108,8 +113,8 @@ export default {
     MovieDetail,
     Date,
     SelectPanel,
-    CinemaList,
-    NoData
+    NoData,
+    CinemaItem
   }
 }
 </script>

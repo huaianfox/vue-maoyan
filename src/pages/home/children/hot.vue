@@ -1,13 +1,13 @@
 <template>
   <section class="inner">
-    <List :path='path'
+    <movie-list :path='path'
           :list='movieList' />
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </section>
 </template>
 
 <script>
-import List from '../components/list'
+import MovieList from '../components/movie-list'
 import { getInfoListAction } from '@/api'
 import { setImgSize } from '@/util'
 
@@ -30,7 +30,7 @@ export default {
     msg: String
   },
   components: {
-    List
+    MovieList
   },
   methods: {
     infiniteHandler ($state) {

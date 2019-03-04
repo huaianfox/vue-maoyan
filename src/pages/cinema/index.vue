@@ -5,9 +5,13 @@
     <SelectPanel class="select-wrapper"
                  :filters="filters" />
     <section class="list">
-      <NoData v-if="empty" ></NoData>
-      <CinemaList class="cinemas"
-                  :cinemaList="cinemas" />
+      <NoData v-if="empty"></NoData>
+      <div>
+        <cinema-item :cinema="item"
+                     v-for="item in cinemas"
+                     :key="item.id">
+        </cinema-item>
+      </div>
       <infinite-loading @infinite="infiniteHandler"></infinite-loading>
     </section>
   </div>
@@ -17,7 +21,7 @@
 import TopBar from './components/top'
 import NavBar from '@/components/navbar/fixed'
 import SelectPanel from '@/components/selectPanel'
-import CinemaList from '@/components/cinemaList'
+import CinemaItem from '@/components/cinema-item'
 import NoData from '@/components/no-data'
 import { getFilterCinemas } from '@/api'
 import { mapActions, mapState, mapMutations } from 'vuex'
@@ -66,8 +70,8 @@ export default {
     NavBar,
     TopBar,
     SelectPanel,
-    CinemaList,
-    NoData
+    NoData,
+    CinemaItem
   }
 }
 </script>

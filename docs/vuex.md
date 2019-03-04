@@ -13,13 +13,14 @@ import filters from '@/config/filters'
 const city = storage.get('city') || { nm: '淮安', id: 180 }
 const cityList = storage.get('cityList')
 const cityHistory = storage.get('cityHistory') || {}
-
+const searchHistory = storage.get('searchHistory') || { movies: { data: [], type: 'movies' }, cinemas: { data: [], type: 'cinemas' } }
 document.cookie = `ci=${city.id}%2C${encodeURI(city.nm)}`
 
 export default {
   city,
   cityList,
   cityHistory,
+  searchHistory,
   detailMovie: {},
   filters,
   cinemaListData: {},
@@ -79,6 +80,15 @@ export default {
   saveCityList (state, data) {
     state.cityList = data.letterMap
     storage.set('cityList', data.letterMap)
+  },
+  updateSearchHistory (state, history) {
+    const list = {}
+    list[history.type] = history
+    state.searchHistory = {
+      ...state.searchHistory,
+      ...list
+    }
+    storage.set('searchHistory', state.searchHistory)
   }
 }
 ```

@@ -3,7 +3,8 @@
     <Navbar :title="detail.nm" />
     <MovieDetail :detail="detail"
                  :link="link">
-                 <i slot="video" class="iconfont icon-play"></i>
+      <i slot="video"
+         class="iconfont icon-play"></i>
     </MovieDetail>
     <Descp :detail="detail" />
     <section class="media">
@@ -33,7 +34,7 @@ import MovieDetail from '@/components/movieDetail'
 import Navbar from '@/components/navbar'
 import CommonFooter from '@/components/common-footer'
 import { getMovieDetail } from '@/api'
-import Descp from './desc'
+import Descp from './components/desc'
 
 export default {
   data () {

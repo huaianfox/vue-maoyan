@@ -1,7 +1,7 @@
 <template>
   <div class="result-wrapper">
     <h3 class="title">{{title}}</h3>
-    <slot name="result" />
+    <slot name="content" />
     <div class="more-result" v-if="tips">{{tips}}</div>
   </div>
 </template>
@@ -27,6 +27,7 @@ export default {
     font-size: 15px;
     color: #999;
     padding: 9px 15px;
+    border-bottom: 1px solid #e6e6e6;
   }
   .more-result {
     color: #ef4238;

@@ -9,7 +9,8 @@
       <div class="del iconfont icon-delete"
            @click="handleDel(key)"></div>
     </div>
-    <div class="hot" v-if="hot">
+    <div class="hot"
+         v-if="hot">
       <p class="word">热门搜索</p>
     </div>
   </div>
@@ -41,9 +42,7 @@ export default {
     },
     handleDel (index) {
       const data = this.history.data.slice()
-      const s = data.splice(index, 1)
-      console.log(data)
-      console.log(s)
+      data.splice(index, 1)
       this.updateSearchHistory({
         type: this.history.type,
         data
@@ -76,7 +75,7 @@ export default {
   line-height: 44px;
   align-items: center;
   .word {
-    padding:  0 10px;
+    padding: 0 10px;
     color: #333;
     font-size: 15px;
     flex: 1 1 auto;

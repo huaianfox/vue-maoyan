@@ -246,7 +246,7 @@ export default {
 ```
 
 ## ComingGroup组件
-接口合并流程详见[HOME之Hot:接口合并](hot?id=合并接口)
+接口合并流程详见[HOME之Hot:接口合并](hot?id=合并接口), ComingGroup组件复用了[MovieItem组件](id=MovieItem组件)
 ```html
 /**
 * @addr src\pages\home\components\relaese-comming.vue
@@ -257,8 +257,10 @@ export default {
          v-for="item in comingList"
          :key="item.comingTitle">
       <p class="group-date">{{item.comingTitle}}</p>
-      <List :path='path'
-            :list='item.data' />
+      <div class="list-wrap">
+        <movie-list :path='path'
+                    :list='item.data' />
+      </div>
     </div>
     <infinite-loading @infinite="infiniteHandler">
       <div slot="no-more">哦，没有更多电影了</div>
@@ -267,7 +269,7 @@ export default {
 </template>
 
 <script >
-import List from '../components/list'
+import MovieList from './movie-list'
 import { getComingListAction } from '@/api'
 import { setImgSize } from '@/util'
 export default {
@@ -329,7 +331,7 @@ export default {
     }
   },
   components: {
-    List
+    MovieList
   }
 }
 </script>

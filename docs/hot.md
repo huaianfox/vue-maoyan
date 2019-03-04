@@ -1,4 +1,6 @@
-## 页面架构
+## 首页热门子页面架构
+- [MovieList组件](hot?id=MovieList组件)
+
 ```html
 // @addr src\pages\home\children\hot.vue
 
@@ -253,92 +255,110 @@ getMovieInfoList(params).then(data => {
 ```
 ## Vue-infinite-loading
 引用了第三方插件Vue-infinite-loading，动态加载电影数据，插件具体使用详见[Vue-infinite-loading](https://peachscript.github.io/vue-infinite-loading/zh/guide/)文档
-## 列表List组件
-List组件在home两个子页面内通用，跳转的页面的路径不同，列表项复用[Thumbnail](hot?id=thumbnail组件)组件
+## MovieList组件
+MovieList组件在home两个子页面内通用，跳转的页面的路径不同，MovieList组件复用[MovieItem组件](hot?id=MovieItem组件)
 ```html
-// src\pages\home\components/list
+//@addr src/pages/home/components/movie-list
 <template>
   <ul>
-    <router-link tag="li" :to="path + item.id"
+    <router-link tag="li"
+                 :to="path + item.id"
                  v-for="(item, index) in list"
                  :key="index">
-      <Thumbnail :movie="item" />
+      <movie-item :movie="item">
+        <div class="movie-item-info"
+             slot="movie-info">
+          <div v-if="item.globalReleased"
+               class="line movie-vote ellipsis">观众评 <span class="grade">{{item.sc}}</span> </div>
+          <div v-else
+               class="line movie-wantsee ellipsis">
+            <span class='person'>{{item.wish}}</span> 人想看</div>
+          <div class="line movie-actor ellipsis">主演：{{item.star}}</div>
+          <div class=" line movie-show ellipsis">{{item.showInfo || `${item.rt} 上映`}}</div>
+        </div>
+      </movie-item>
+
     </router-link>
   </ul>
 </template>
 
 <script >
-import Thumbnail from '@/components/thumbnail'
+import MovieItem from '@/components/movie-item'
 export default {
   props: {
     path: String,
     list: Array
   },
   components: {
-    Thumbnail
+    MovieItem
   }
 }
 </script>
 ```
 
-## Thumbnail组件
+## MovieItem组件
+MovieItem组件是基础组件，作为展示组件在其他组件中封装或者直接使用，在[hot页](id=hot),[release页](id=release), [search页](id=search)使用
 
 ```html
-// @addr src\components\thumbnail\index.vue
+// @addr src\components\movie-item\index.vue
 <template>
-  <div class="thumb">
-    <div class="avatar">
-      <img class="img"
-           v-lazy="movie.img"
-           alt="">
+  <div class="movie-item">
+    <img v-lazy="img"
+         class="img poster">
+    <div class="info ellipsis">
+      <h4 class="name ellipsis">
+        {{movie.nm}}
+        <span class="version"
+              :class="movie.version"></span>
+      </h4>
+      <slot name="movie-info" />
     </div>
-    <div class="info">
-      <div class="movie-title">
-        <span class='name'>{{movie.nm}}</span>
-        <span class='version'
-              :class="version[movie.version]"></span>
-      </div>
-      <div v-if="movie.globalReleased"
-           class="movie-vote ellipsis">观众评{{movie.sc}}</div>
-      <div v-else
-           class="movie-wantsee ellipsis">
-        <span class='person'>{{movie.wish}}</span> 人想看</div>
-      <div class="movie-actor ellipsis">主演：{{movie.star}}</div>
-      <div class="movie-show ellipsis">{{showInfo}}</div>
-    </div>
-    <div class="buy-action">
-      <div class='sell'
-           :class='action.tag'>
-        {{action.act}}
+    <div class="movie-aside">
+      <slot name="movie-aside-item" />
+      <div class="btns"
+           v-if="showst">
+        <span class="btn"
+              :class="showst.cls">{{showst.name}}</span>
       </div>
     </div>
   </div>
 </template>
 
-<script>
+<script >
 export default {
-  name: 'Thumbnail',
+  name: 'MovieItem',
   data () {
     return {
-      version: ['v3d-imax', '3d', 'v2d-imax'],
-      status: {
-        1: { tag: 'wantsee', act: '想看' },
-        3: { tag: '', act: '购票' },
-        4: { tag: 'presell', act: '预售' }
+      show: {
+        1: {
+          name: '想看',
+          cls: 'want'
+        },
+        3: {
+          name: '购票',
+          cls: 'buy'
+        },
+        4: {
+          name: '预售',
+          cls: 'pre'
+        }
       }
     }
   },
-  props: {
-    movie: {
-      type: Object
+  computed: {
+    img () {
+      return this.movie.img.replace('w.h', this.size)
+    },
+    showst () {
+      const { show, movie } = this
+      return show[movie.showst]
     }
   },
-  computed: {
-    action () {
-      return this.status[this.movie.showst]
-    },
-    showInfo () {
-      return this.movie.showInfo || `${this.movie.rt} 上映`
+  props: {
+    movie: Object,
+    size: {
+      type: String,
+      default: '128.180'
     }
   }
 }

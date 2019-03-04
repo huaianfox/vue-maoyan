@@ -4,8 +4,10 @@
          v-for="item in comingList"
          :key="item.comingTitle">
       <p class="group-date">{{item.comingTitle}}</p>
-      <List :path='path'
-            :list='item.data' />
+      <div class="list-wrap">
+        <movie-list :path='path'
+                    :list='item.data' />
+      </div>
     </div>
     <infinite-loading @infinite="infiniteHandler">
       <div slot="no-more">哦，没有更多电影了</div>
@@ -14,7 +16,7 @@
 </template>
 
 <script >
-import List from '../components/list'
+import MovieList from './movie-list'
 import { getComingListAction } from '@/api'
 import { setImgSize } from '@/util'
 export default {
@@ -76,7 +78,7 @@ export default {
     }
   },
   components: {
-    List
+    MovieList
   }
 }
 </script>
