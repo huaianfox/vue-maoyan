@@ -2,7 +2,7 @@
 
 [线上演示](dist/)
 
-[github源码]([/dist/](https://github.com/huaianfox/vue-maoyan))
+[github源码](https://github.com/huaianfox/vue-maoyan)
 
 ## 已开发页面
 
@@ -18,7 +18,7 @@
 
 ## 动态效果
 
-![maoyan-1](_assets/gif/maoyan.min.gif ':size=300')
+![maoyan-1](https://huaianfox.github.io/vue-maoyan/_assets/gif/maoyan.min.gif ':size=300')
 
 
 ## 效果预览
