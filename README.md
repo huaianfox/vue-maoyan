@@ -8,7 +8,7 @@
 
 ## 动态演示效果
 
-[动态演示](https://huaianfox.github.io/vue-maoyan/_assets/gif/maoyan.min.gif)
+![动态演示](https://huaianfox.github.io/vue-maoyan/_assets/gif/maoyan.min.gif)
 
 ## 已开发页面
 
