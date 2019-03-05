@@ -32,7 +32,9 @@
            @click="handlePlay"></div>
       <div class="video">
         <video :src="detail.vd"
-               controls="controls"></video>
+               autoplay
+               controls>
+        </video>
       </div>
     </div>
     <common-footer />
