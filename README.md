@@ -8,7 +8,7 @@
 
 ## 动态演示效果
 
-<img src="https://huaianfox.github.io/vue-maoyan/_assets/gif/maoyan.min.gif" width="300">
+[动态演示](https://huaianfox.github.io/vue-maoyan/_assets/gif/maoyan.min.gif)
 
 ## 已开发页面
 

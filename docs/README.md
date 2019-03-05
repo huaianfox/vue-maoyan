@@ -1,6 +1,6 @@
 ## 演示
 
-[线上演示](dist/)
+[线上演示](https://huaianfox.github.io/vue-maoyan/dist/)
 
 [github源码](https://github.com/huaianfox/vue-maoyan)
 
