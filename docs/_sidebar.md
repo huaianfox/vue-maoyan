@@ -12,3 +12,4 @@
 - [城市页面开发](city)
 - [selectPanel组件开发](select-panel)
 - [引入vuex](vuex)
+- [构建和部署](bulid_deploymement)

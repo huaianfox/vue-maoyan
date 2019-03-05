@@ -2,7 +2,7 @@
   <div class="pages">
     <NavBar :title="cinemaData.nm" />
     <Info :info="cinemaData"
-          v-if="cinemaData" />
+          v-if="cinemaData.cinemaId" />
     <Swiper :list="movieList"
             v-if="movieList.length"
             :vip="vipInfo" />

@@ -67,7 +67,6 @@ export default {
       this.getCinemaList().then(data => {
         const { paging } = data
         if (paging.total === 0) {
-          console.log('this')
           this.empty = true
         }
         if (paging.hasMore) {

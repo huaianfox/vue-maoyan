@@ -130,7 +130,6 @@ export default {
     },
     formatData (data, title) {
       if (!data) return
-      console.log(data)
       const { list, total } = data
       this[title] = {
         list: total > this.max ? list.slice(0, this.max) : list,

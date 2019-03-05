@@ -21,7 +21,6 @@ export default {
   computed: {
     ...mapState(['filters']),
     selectIndex () {
-      console.log(this.filters.brandId)
       return this.filters.brandId
     }
   },

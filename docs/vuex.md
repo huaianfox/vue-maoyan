@@ -201,7 +201,6 @@ import { mapState, mapMutations } from 'vuex'
       this.getCinemaList().then(data => {
         const { paging } = data
         if (paging.total === 0) {
-          console.log('this')
           this.empty = true
         }
         if (paging.hasMore) {
@@ -278,7 +277,6 @@ import { mapState, mapMutations } from 'vuex'
   computed: {
     ...mapState(['filters']),
     selectIndex () {
-      console.log(this.filters.brandId)
       return this.filters.brandId
     }
   }

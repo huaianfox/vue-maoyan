@@ -1,7 +1,7 @@
 const env = process.env.NODE_ENV
 
 module.exports = {
-  publicPath: env === 'production' ? '/vue-maoyan/dist/' : '/',
+  publicPath: env.VUE_APP_PUBLIC_PATH,
   outputDir: 'docs/dist',
   assetsDir: 'assets',
   productionSourceMap: false,

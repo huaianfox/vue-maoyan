@@ -18,14 +18,16 @@
   <script>
     window.$docsify = {
       nameLink: '/',
-      logo: '/_assets/favicon.ico',
-      name: 'Vue猫眼电影',
+      // logo: '/_assets/favicon.ico',
+      name: 'Vue猫眼电影开发文档',
       repo: 'https://github.com/huaianfox/vue-maoyan',
-      // loadNavbar: true,
       loadSidebar: true,
+      mergeNavbar: true,
+      formatUpdated: '{MM}/{DD} {HH}:{mm}',
       maxLevel: 4,
       subMaxLevel: 4,
       auto2top: true,
+      routerMode: 'history',
       search: 'auto',
       search: {
         maxAge: 86400000, // 过期时间，单位毫秒，默认一天
@@ -45,8 +47,6 @@
   </script>
   <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
   <script src="//unpkg.com/docsify-copy-code"></script>
-  <!-- <script src="//unpkg.com/docsify/lib/plugins/gitalk.min.js"></script>
-  <script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script> -->
 
   <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
   <script>

@@ -9,9 +9,10 @@
          :class="{fixed: isFixed}">
       <Date :dates="dates" />
       <SelectPanel :filters="filters"
+                   v-if="filters.brand"
                    @change="changeSelection" />
     </div>
-    <NoData v-if="empty"></NoData>
+    <NoData v-if="loading && empty"></NoData>
     <div class="list">
       <cinema-item :cinema="item"
                    v-for="item in cinemas"
@@ -36,6 +37,7 @@ import { mapActions, mapState, mapMutations } from 'vuex'
 export default {
   data () {
     return {
+      loading: true,
       movieId: 0,
       filters: {},
       dates: [],
@@ -44,24 +46,23 @@ export default {
       isFixed: false,
       handleThottle: null,
       cinemaList: [],
-      changeSelect: '',
-      loaded: false
+      changeSelect: ''
     }
   },
   computed: {
     ...mapState(['cinemas', 'city']),
     empty () {
       const list = this.cinemas || []
-      return !list.length && this.loaded
+      return !list.length
     }
   },
   methods: {
     ...mapActions(['postMovie']),
-    ...mapMutations(['changeFilter', 'emptyCinemaList']),
+    ...mapMutations(['changeFilter', 'emptyCinemaList', 'resetFilter']),
     infiniteHandler ($state) {
-      this.postMovie({ movieId: this.movieId, updateShowDay: true, cityId: this.city.id }).then(data => {
+      this.loading && this.postMovie({ movieId: this.movieId, updateShowDay: true, cityId: this.city.id }).then(data => {
         const { paging } = data
-        this.loaded = true
+        this.loading = true
         if (!this.dates.length) {
           this.dates = data.showDays.dates
         }
@@ -74,6 +75,7 @@ export default {
           $state.complete()
         }
       })
+      this.loading = false
     },
     handleScroll () {
       const top = document.documentElement.scrollTop
@@ -90,7 +92,6 @@ export default {
     window.removeEventListener('scroll', this.handleScroll)
   },
   created () {
-    this.emptyCinemaList()
     const movieId = +this.$route.params.id
     this.movieId = movieId
     getMovieDetail({ params: { movieId } }).then(data => {
@@ -107,6 +108,10 @@ export default {
     }).then(data => {
       this.filters = data
     })
+  },
+  destroyed () {
+    this.resetFilter()
+    this.emptyCinemaList()
   },
   components: {
     Navbar,

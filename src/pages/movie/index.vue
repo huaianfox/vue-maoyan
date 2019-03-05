@@ -10,9 +10,10 @@
     <section class="media">
       <h3>媒体库</h3>
       <ul class="movie-stages">
-        <li class="movie-item video">
+        <li class="movie-item video"
+            @click="handlePlay">
           <img class="img"
-               v-lazy="media.video"
+               v-lazy="detail.videoImg"
                alt="">
           <i class="iconfont icon-play"></i>
         </li>
@@ -25,6 +26,15 @@
         </li>
       </ul>
     </section>
+    <div class="video-wrapper"
+         v-if="play">
+      <div class="masker"
+           @click="handlePlay"></div>
+      <div class="video">
+        <video :src="detail.vd"
+               controls="controls"></video>
+      </div>
+    </div>
     <common-footer />
   </div>
 </template>
@@ -40,7 +50,8 @@ export default {
   data () {
     return {
       detail: {},
-      link: false
+      link: false,
+      play: false
     }
   },
   computed: {
@@ -51,6 +62,11 @@ export default {
       media.photos = p.map(item => item.replace('w.h', '180.140'))
       media.video = video
       return media
+    }
+  },
+  methods: {
+    handlePlay () {
+      this.play = !this.play
     }
   },
   created () {
@@ -118,5 +134,34 @@ export default {
   right: 0;
   font-size: 28px;
   color: #dccece;
+}
+.video-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  .masker {
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+  }
+  .video {
+    position: absolute;
+    top: 30%;
+    left: 0;
+    width: 100%;
+    padding-top: 56.25%;
+    height: 0;
+    z-index: 999;
+    video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+    }
+  }
 }
 </style>

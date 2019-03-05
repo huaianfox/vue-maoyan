@@ -12,9 +12,7 @@ import './assets/styles/index.scss'
 Vue.config.productionTip = false
 
 fastClick.attach(document.body)
-Vue.use(VueLazyload, {
-  loading: '/assets/loading.png'
-})
+Vue.use(VueLazyload)
 
 Vue.use(infiniteScroll)
 Vue.use(InfiniteLoading, {

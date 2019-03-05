@@ -31,8 +31,9 @@
             <div class="hall">{{item.th}}</div>
           </div>
           <div class="price">
-            <div class="sell">￥ <span class="stonefont"
-                    v-html="item.sellPr"></span>
+            <div class="sell">￥{{item.vipPrice}}
+              <!-- <span class="stonefont"
+                    v-html="item.sellPr"></span> -->
             </div>
             <div class="vipPrice"
                  v-if="item.vipPriceName">
@@ -236,11 +237,10 @@ export default {
     }
     .vipPrice {
       display: inline-block;
+      margin-left: 4px;
       line-height: 15px;
       height: 15px;
-      -webkit-transform: scale(0.8);
       transform: scale(0.8);
-      -webkit-transform-origin: left;
       transform-origin: left;
       margin-right: -16px;
       border: 1px solid #ff9000;

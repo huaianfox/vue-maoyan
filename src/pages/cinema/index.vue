@@ -2,10 +2,11 @@
   <div class="panel">
     <NavBar title="影院" />
     <TopBar />
-    <SelectPanel class="select-wrapper"
+    <SelectPanel v-if="filters.brand"
+                 class="select-wrapper"
                  :filters="filters" />
     <section class="list">
-      <NoData v-if="empty"></NoData>
+      <NoData v-if=" loading && empty"></NoData>
       <div>
         <cinema-item :cinema="item"
                      v-for="item in cinemas"
@@ -30,7 +31,8 @@ export default {
   name: 'Cinema',
   data () {
     return {
-      filters: {}
+      filters: {},
+      loading: true
     }
   },
   computed: {
@@ -42,12 +44,12 @@ export default {
   },
   methods: {
     ...mapActions(['getCinemaList']),
-    ...mapMutations(['changeFilter']),
+    ...mapMutations(['changeFilter', 'emptyCinemaList', 'resetFilter']),
     infiniteHandler ($state) {
-      this.getCinemaList().then(data => {
+      this.loading && this.getCinemaList().then(data => {
+        this.loading = true
         const { paging } = data
         if (paging.total === 0) {
-          console.log('this')
           this.empty = true
         }
         if (paging.hasMore) {
@@ -59,12 +61,17 @@ export default {
           $state.complete()
         }
       })
+      this.loading = false
     }
   },
   created () {
     getFilterCinemas({ params: { ci: this.city.id } }).then(data => {
       this.filters = data
     })
+  },
+  beforeDestroy () {
+    this.resetFilter()
+    this.emptyCinemaList()
   },
   components: {
     NavBar,
