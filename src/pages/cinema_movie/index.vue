@@ -4,7 +4,9 @@
     <Navbar :title="detail.nm" />
     <MovieDetail v-show="detail.nm"
                  :detail="detail">
-      <span v-if="detail.globalReleased" slot="movie-score" class="num">{{detail.sc}}</span>
+      <span v-if="detail.globalReleased"
+            slot="movie-score"
+            class="num">{{detail.sc}}</span>
     </MovieDetail>
     <div class="choose"
          ref="fixedConetnt"

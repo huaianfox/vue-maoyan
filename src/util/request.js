@@ -2,7 +2,8 @@ import Axios from 'axios'
 let baseURL = process.env.VUE_APP_URL
 
 const defaultConfig = {
-  baseURL
+  baseURL,
+  withCredentials: true
 }
 
 const STATUS_CODE = 200
