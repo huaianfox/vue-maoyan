@@ -13,3 +13,4 @@
 - [selectPanel组件开发](vue-maoyan/select-panel)
 - [引入vuex](vue-maoyan/vuex)
 - [构建和部署](vue-maoyan/bulid_deploymement)
+- [项目博客小记](vue-maoyan/blog)
