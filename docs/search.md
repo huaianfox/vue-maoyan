@@ -1,10 +1,10 @@
 ## 搜索页面架构预览
 Search @addr src\pages\search\index.vue
--  NavBar组件使用[Navbar基础组件](home?id=navbar基础组件)
--  [ResultHistory组件](search?id=ResultHistory组件)  搜索历史组件
--  [Panel组件](search?id=Panel组件)  被ResultCinema组件、ResultCinema组件复用
--  [ResultCinema组件](search?id=ResultCinema组件) 搜索结果影院组件
--  [ResultCinema组件](search?id=ResultCinema组件) 搜索结果影院组件
+-  NavBar组件使用[Navbar基础组件](vue-maoyan/home?id=navbar基础组件)
+-  [ResultHistory组件](vue-maoyan/search?id=ResultHistory组件)  搜索历史组件
+-  [Panel组件](vue-maoyan/search?id=Panel组件)  被ResultCinema组件、ResultCinema组件复用
+-  [ResultCinema组件](vue-maoyan/search?id=ResultCinema组件) 搜索结果影院组件
+-  [ResultCinema组件](vue-maoyan/search?id=ResultCinema组件) 搜索结果影院组件
 
 > 页面初始从vuex获取历史搜索记录，从不同的路径来源进入搜索页面显示不同的历史记录，请求的参数也不同
 
@@ -177,7 +177,7 @@ export default {
 | cityId | Number | true | 城市ID                                            |
 | stype  | Number | true | 搜索类型， -1显示 电影、影院等信息；2显示影院信息 |
 
-> 根据进入搜索页面的来源， 从[首页](home)进入 stype= -1，从[影院](cinema)页面进入 stype= 2
+> 根据进入搜索页面的来源， 从[首页](vue-maoyan/home)进入 stype= -1，从[影院](vue-maoyan/cinema)页面进入 stype= 2
 
 ##### 返回字段
 | 字段    | 类型   | 说明                           |
@@ -301,7 +301,7 @@ export default {
 
 ## ResultMovie组件
 
-电影列表展示组件,复用了[movieitem组件](hot?id=movieitem组件)、[Panel组件](search?id=Panel组件) 
+电影列表展示组件,复用了[movieitem组件](vue-maoyan/hot?id=movieitem组件)、[Panel组件](vue-maoyan/search?id=Panel组件) 
 
 ```html
 /**
@@ -370,7 +370,7 @@ export default {
 ```
 
 ## ResultCinema组件
-复用了[cinemaitem组件](cinema?id=cinemaitem组件)、[Panel组件](search?id=Panel组件)
+复用了[cinemaitem组件](vue-maoyan/cinema?id=cinemaitem组件)、[Panel组件](vue-maoyan/search?id=Panel组件)
 
 ```html
 /**

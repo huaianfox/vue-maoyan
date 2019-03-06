@@ -1,9 +1,9 @@
 ## select-panel组件结构
 > 将功能分治在更小的组件内，供select-panel组件调用，对外暴露一个统一的调用接口
 
-- [Region组件](select-panel?id=Region组件) 区域选择
-- [Brand组件](select-panel?id=Brand组件)  品牌选择
-- [Special组件](select-panel?id=Special组件) 服务和影厅等选择
+- [Region组件](vue-maoyan/select-panel?id=Region组件) 区域选择
+- [Brand组件](vue-maoyan/select-panel?id=Brand组件)  品牌选择
+- [Special组件](vue-maoyan/select-panel?id=Special组件) 服务和影厅等选择
 
 ```html
 /**

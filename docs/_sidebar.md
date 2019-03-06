@@ -2,7 +2,7 @@
 - [TAB页layout布局](vue-maoyan/layout)
 - [HOME页架构](vue-maoyan/home)
 - [HOME之Hot](vue-maoyan/hot)
-- [HOME之Release](vue-maoyan/release)
+- [HOME之Release](vue-maoyan/release)vue-maoyan/
 - [影院页开发](vue-maoyan/cinema)
 - [电影-影院页面开发](vue-maoyan/cinema_movie)
 - [电影详情页面开发](vue-maoyan/movie_detail)

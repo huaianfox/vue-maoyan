@@ -1,17 +1,17 @@
 ## 影院页架构预览
 Cinema 目录在@addr src\pages\cinema\index.vue
--  NavBar组件使用[Navbar固定组件](home?id=navbar固定组件)
--  [TopBar组件](cinema?id=TopBar组件)基于[Topbar基础组件](home?id=通用topbar组件)，二次开发
--  [SelectPanel组件](select-panel)，是通用组合组件,根据功能划分成多个小组件，最后组合暴露一个接口
--   [NoData组件](cinema?id=NoData组件)，通用组件
--   [CinemaItem组件](cinema?id=CinemaItem组件)，通用组件
--   [Tag组件](cinema?id=Tag组件)，通用组件
+-  NavBar组件使用[Navbar固定组件](vue-maoyan/home?id=navbar固定组件)
+-  [TopBar组件](vue-maoyan/cinema?id=TopBar组件)基于[Topbar基础组件](vue-maoyan/home?id=通用topbar组件)，二次开发
+-  [SelectPanel组件](vue-maoyan/select-panel)，是通用组合组件,根据功能划分成多个小组件，最后组合暴露一个接口
+-   [NoData组件](vue-maoyan/cinema?id=NoData组件)，通用组件
+-   [CinemaItem组件](vue-maoyan/cinema?id=CinemaItem组件)，通用组件
+-   [Tag组件](vue-maoyan/cinema?id=Tag组件)，通用组件
 
 > 页面初始加载获取当前城市选择影院列表，默认的筛选条件请求
 
 > 页面初始加载获取当前城市选择影院的筛选的条件（影院区域划分、品牌、会员卡、影厅等），之后传给SelectPanel组件，点击SelectPanel组件选择筛选条件重新请求对应的接口数据
 
-> cinema页面渲染数据存放在vuex的state.cinemas，只有在打开相关页面时才赋值，默认为空，详见[影院页的vuex操作](vuex?id=影院列表的vuex使用)
+> cinema页面渲染数据存放在vuex的state.cinemas，只有在打开相关页面时才赋值，默认为空，详见[影院页的vuex操作](vue-maoyan/vuex?id=影院列表的vuex使用)
 
 
 ```html
@@ -240,7 +240,7 @@ this.getCinemaList().then(data => {
 
 ## TopBar组件
 
-TopBar组件在[基础组件](home?id=navbar基础组件)的基础上，增加了一个搜索页面入口
+TopBar组件在[基础组件](vue-maoyan/home?id=navbar基础组件)的基础上，增加了一个搜索页面入口
 ```html
 /**
 * @addr src\pages\cinema\components\top.vue
@@ -303,7 +303,7 @@ export default {
 ```
 
 ## CinemaItem组件
-展示组件，因为在不同接口中部分数据属性不一致，其中又拆分出一个[Tag组件](cinema?id=Tag组件)
+展示组件，因为在不同接口中部分数据属性不一致，其中又拆分出一个[Tag组件](vue-maoyan/cinema?id=Tag组件)
 ```html
 /**
 * @addr src\components\cinema-item.vue

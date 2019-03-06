@@ -1,5 +1,5 @@
 ## 首页热门子页面架构
-- [MovieList组件](hot?id=MovieList组件)
+- [MovieList组件](vue-maoyan/hot?id=MovieList组件)
 
 ```html
 // @addr src\pages\home\children\hot.vue
@@ -73,7 +73,7 @@ export default {
 
 ## API接口设计
 ### 接口分析
-获取当前城市电影列表，除了相关的字段，还需要cookie的ci值（包含城市id和城市名），切换城市时也修改对应的ci，详见[城市city](city)
+获取当前城市电影列表，除了相关的字段，还需要cookie的ci值（包含城市id和城市名），切换城市时也修改对应的ci，详见[城市city](vue-maoyan/city)
 #### 初始化获取hot电影列表
 | 信息        | 说明                                |
 | :---------- | :---------------------------------- |
@@ -256,7 +256,7 @@ getMovieInfoList(params).then(data => {
 ## Vue-infinite-loading
 引用了第三方插件Vue-infinite-loading，动态加载电影数据，插件具体使用详见[Vue-infinite-loading](https://peachscript.github.io/vue-infinite-loading/zh/guide/)文档
 ## MovieList组件
-MovieList组件在home两个子页面内通用，跳转的页面的路径不同，MovieList组件复用[MovieItem组件](hot?id=MovieItem组件)
+MovieList组件在home两个子页面内通用，跳转的页面的路径不同，MovieList组件复用[MovieItem组件](vue-maoyan/hot?id=MovieItem组件)
 ```html
 //@addr src/pages/home/components/movie-list
 <template>
@@ -297,7 +297,7 @@ export default {
 ```
 
 ## MovieItem组件
-MovieItem组件是基础组件，作为展示组件在其他组件中封装或者直接使用，在[hot页](id=hot),[release页](id=release), [search页](id=search)使用
+MovieItem组件是基础组件，作为展示组件在其他组件中封装或者直接使用，在[hot页](vue-maoyan/hot),[release页](vue-maoyan/release), [search页](ivue-maoyan/search)使用
 
 ```html
 // @addr src\components\movie-item\index.vue

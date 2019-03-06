@@ -135,3 +135,8 @@ export const getSearch = request('/search')
 
 ```
 
+### 部署遇到的坑
+
+> 项目部署在github的域名下，github强制要求ajax请求也必须是https协议，http请求的数据会被浏览器block，解决方案就是将反向代理的链接的升级为https
+
+

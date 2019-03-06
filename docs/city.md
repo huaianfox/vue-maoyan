@@ -1,9 +1,9 @@
 ## 城市选择结构
 city @addr src\pages\city\index.vue
 相对于原页面作了少许改动，增加了顶部导航栏
--  NavBar组件使用[Navbar基础组件](home?id=navbar基础组件)
--  [List组件](city?id=List组件)
--  [Alphabet组件](cinema_movie?id=Alphabet组件)
+-  NavBar组件使用[Navbar基础组件](vue-maoyan/home?id=navbar基础组件)
+-  [List组件](vue-maoyan/city?id=List组件)
+-  [Alphabet组件](vue-maoyan/cinema_movie?id=Alphabet组件)
 
 ```html
 /**
@@ -100,7 +100,7 @@ export default {
 }
 ```
 ## List组件
-列表组件内引用了一个[Panel组件](city?id=panel组件)和[better-scroll插件](https://ustbhuangyi.github.io/better-scroll/#/)
+列表组件内引用了一个[Panel组件](vue-maoyan/city?id=panel组件)和[better-scroll插件](https://ustbhuangyi.github.io/better-scroll/#/)
 
 ``` html
 /***
@@ -256,7 +256,7 @@ import { mapState, mapMutations } from 'vuex'
 ```
 
 ## Alphabet组件
-> 业务逻辑详见[Alphabet组件逻辑](city?id=Alphabet组件逻辑)
+> 业务逻辑详见[Alphabet组件逻辑](vue-maoyan/city?id=Alphabet组件逻辑)
 
 ```html
 /**

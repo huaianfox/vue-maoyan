@@ -6,15 +6,15 @@
 
 ## 已开发页面
 
-- [x] 热门电影
-- [x] 即将上映
-- [x] 城市列表
-- [x] 搜索页面
-- [x] 影院页面
-- [x] 电影-影院
-- [x] 影院-电影
-- [x] 电影详情
-- [x] 个人中心
+- [x] [热门电影](vue-maoyan/hot)
+- [x] [即将上映](vue-maoyan/release)
+- [x] [城市列表](vue-maoyan/city)
+- [x] [搜索页面]((vue-maoyan/search))
+- [x] [影院页面](vue-maoyan/cinema)
+- [x] [电影-影院](vue-maoyan/cinema_movie)
+- [x] [影院-电影](vue-maoyan/shows)
+- [x] [电影详情](vue-maoyan/movie_detail)
+- [x] [个人中心](vue-maoyan/profile)
 
 ## 动态效果
 

@@ -1,10 +1,10 @@
 ## 电影- 影院页面架构预览
 Cinema 目录在src\pages\cinema_movie\index.vue
 -  根据电影选择电影院
--  NavBar组件使用[Navbar基础组件](home?id=navbar基础组件)
--  [Date组件](cinema_movie?id=Date组件)[SelectPanel组件](select-panel)，组成一个更大select的组件
--   [NoData组件](cinema?id=NoData组件)，通用组件(cinema页面有解析)
--   [CinemaItem组件](cinema?id=CinemaItem组件),在cinema页面有解释
+-  NavBar组件使用[Navbar基础组件](vue-maoyan/home?id=navbar基础组件)
+-  [Date组件](vue-maoyan/cinema_movie?id=Date组件)[SelectPanel组件](vue-maoyan/select-panel)，组成一个更大select的组件
+-   [NoData组件](vue-maoyan/cinema?id=NoData组件)，通用组件(cinema页面有解析)
+-   [CinemaItem组件](vue-maoyan/cinema?id=CinemaItem组件),在cinema页面有解释
 
 > 页面初始加载获取当前电影数据
 

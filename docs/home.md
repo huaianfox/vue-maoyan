@@ -1,7 +1,7 @@
 ## 首页架构预览
 -  主页分两个子页面，正在热映（hot）和即将上映页面，HOME主页默认显示正在热映（hot）页面
-  - [正在热映HOT页面](hot)
-  - [即将上映页面](release)
+  - [正在热映HOT页面](vue-maoyan/hot)
+  - [即将上映页面](vue-maoyan/release)
 
 ```html
 /**

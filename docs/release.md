@@ -246,7 +246,7 @@ export default {
 ```
 
 ## ComingGroup组件
-接口合并流程详见[HOME之Hot:接口合并](hot?id=合并接口), ComingGroup组件复用了[MovieItem组件](id=MovieItem组件)
+接口合并流程详见[HOME之Hot:接口合并](vue-maoyan/hot?id=合并接口), ComingGroup组件复用了[MovieItem组件](vue-maoyan/cinema?id=MovieItem组件)
 ```html
 /**
 * @addr src\pages\home\components\relaese-comming.vue

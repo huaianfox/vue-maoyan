@@ -1,10 +1,10 @@
 ## 影院-电影页面架构预览
 Cinema 目录在src\pages\shows\index.vue
 -  根据电影院选择电影
--  NavBar组件使用[Navbar基础组件](home?id=navbar基础组件)
--  [Info组件](shows?id=Info组件)
--  [Swiper组件](shows?id=Swiper组件) 根据页面功能划分多个小组件组成
--  [Deal组件](shows?id=Deal组件)，
+-  NavBar组件使用[Navbar基础组件](vue-maoyan/home?id=navbar基础组件)
+-  [Info组件](vue-maoyan/shows?id=Info组件)
+-  [Swiper组件](vue-maoyan/shows?id=Swiper组件) 根据页面功能划分多个小组件组成
+-  [Deal组件](vue-maoyan/shows?id=Deal组件)，
 
 > 页面初始加载获取当前影院数据
 
@@ -245,7 +245,7 @@ export default {
 根据页面功能划分了多个组件组成，核心依赖[vue-awesome-swiper](https://github.com/surmon-china/vue-awesome-swiper)
 
 - 滑动电影海报或者滑动列表，联动下方切换对应是电影日期选择和电影播放时间表、座位等信息。
-- 在此划分了[Seat组件](shows?id=Seat组件)渲染电影播放时间、场次等信息、[Discount组件](shows?id=Discount组件)渲染优惠信息
+- 在此划分了[Seat组件](vue-maoyan/shows?id=Seat组件)渲染电影播放时间、场次等信息、[Discount组件](vue-maoyan/shows?id=Discount组件)渲染优惠信息
 
 ```html
 /**

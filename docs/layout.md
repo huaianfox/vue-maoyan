@@ -1,9 +1,9 @@
 ## TAB布局结构
-> tab页主要有home、cinema， profile,通过底部的tab导航栏切换，设置路由让这三个tab页在一个[layout布局](layout?id=layout路由设置)中使用，公用一个[Tabbar组件](layout?id=Tabbar组件)
+> tab页主要有home、cinema， profile,通过底部的tab导航栏切换，设置路由让这三个tab页在一个[layout布局](vue-maoyan/layout?id=layout路由设置)中使用，公用一个[Tabbar组件](vue-maoyan/layout?id=Tabbar组件)
 
-- [主页](home) HOME页
-- [影院](cinema) Cinema页
-- [个人中心](profile) Profile页
+- [主页](vue-maoyan/home) HOME页
+- [影院](vue-maoyan/cinema) Cinema页
+- [个人中心](vue-maoyan/profile) Profile页
 
 
 ```html
@@ -26,7 +26,7 @@ export default {
 
 ```
 ## layout路由设置
-> 应用初始化 Layout组件，[Home组件](home)，[Hot组件](hot)同步加载，其他组件都是异步加载,后续权限控制等待扩展
+> 应用初始化 Layout组件，[Home组件](vue-maoyan/home)，[Hot组件](vue-maoyan/hot)同步加载，其他组件都是异步加载,后续权限控制等待扩展
 
 ```js
 /**
