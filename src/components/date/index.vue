@@ -17,7 +17,10 @@ export default {
     return {}
   },
   props: {
-    dates: Array,
+    dates: {
+      type: Array,
+      default: []
+    },
     action: String
   },
   computed: {

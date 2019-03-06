@@ -1,4 +1,5 @@
 import { getCinemaList, postMovie, getCityList } from '@/api'
+import qs from 'qs'
 
 export default {
   updatedMovieDetail (ctx, movie) {
@@ -19,18 +20,18 @@ export default {
   },
   postMovie (ctx, payload) {
     const { filters } = ctx.state
-    const time = Date.now()
+    // const time = Date.now()
     if (filters.offset === 0) {
       ctx.commit('initCinemaList', {})
     }
     return postMovie({
-      params: {
-        forceUpdate: time
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
       },
-      data: {
+      data: qs.stringify({
         ...filters,
         ...payload
-      }
+      })
     }).then(data => {
       ctx.commit('initCinemaList', data)
       return data

@@ -64,7 +64,8 @@ export default {
     ...mapActions(['postMovie']),
     ...mapMutations(['changeFilter', 'emptyCinemaList', 'resetFilter']),
     infiniteHandler ($state) {
-      this.loading && this.postMovie({ movieId: this.movieId, updateShowDay: true, cityId: this.city.id }).then(data => {
+
+      this.loading && this.postMovie({ movieId: this.movieId, updateShowDay: !this.dates.length, cityId: this.city.id }).then(data => {
         const { paging } = data
         this.loading = true
         if (!this.dates.length) {
