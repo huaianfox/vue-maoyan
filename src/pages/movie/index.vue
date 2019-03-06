@@ -5,6 +5,11 @@
                  :link="link">
       <i slot="video"
          class="iconfont icon-play"></i>
+
+      <div slot="movie-score">
+        <Stars v-if="detail.globalReleased" :score="detail.sc" />
+        <span v-if="detail.globalReleased" class="num">{{detail.sc}}</span>
+      </div>
     </MovieDetail>
     <Descp :detail="detail" />
     <section class="media">
@@ -44,6 +49,7 @@
 <script >
 import MovieDetail from '@/components/movieDetail'
 import Navbar from '@/components/navbar'
+import Stars from '@/components/star'
 import CommonFooter from '@/components/common-footer'
 import { getMovieDetail } from '@/api'
 import Descp from './components/desc'
@@ -81,7 +87,8 @@ export default {
     Navbar,
     MovieDetail,
     Descp,
-    CommonFooter
+    CommonFooter,
+    Stars
   }
 }
 </script>

@@ -3,7 +3,9 @@
        :class="{fixed50: changeSelect}">
     <Navbar :title="detail.nm" />
     <MovieDetail v-show="detail.nm"
-                 :detail="detail" />
+                 :detail="detail">
+      <span v-if="detail.globalReleased" slot="movie-score" class="num">{{detail.sc}}</span>
+    </MovieDetail>
     <div class="choose"
          ref="fixedConetnt"
          :class="{fixed: isFixed}">

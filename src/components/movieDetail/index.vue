@@ -12,8 +12,9 @@
         <div class="title ellipsis">{{detail.nm}}</div>
         <div class="p1 ellipsis">{{detail.enm}}</div>
         <div class="score ellipsis p1">
-          <span class="num">{{detail.sc}}</span>
-          <span class="p1">（{{num}}万人评）</span>
+          <slot name="movie-score" />
+          <span class="p1" v-if="detail.globalReleased">（{{num}}万人评）</span>
+          <span v-if="!detail.globalReleased">{{detail.snum}}人想看</span>
         </div>
         <div class="p1 ellipsis">{{detail.cat}}</div>
         <div class="p1 ellipsis">{{detail.src}}</div>
@@ -178,7 +179,6 @@ export default {
       margin-top: 5px;
       font-size: 12px;
       color: #fff;
-      opacity: 0.8;
     }
     .score {
       font-size: 18px;
@@ -187,9 +187,8 @@ export default {
       margin-top: 11px;
     }
     .stars {
-      display: block;
       .num {
-        padding-left: 5px;
+        padding-left: 8px;
         padding-bottom: 5px;
         font-size: 16px;
       }
